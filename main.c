@@ -1,19 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prueba.c                                           :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abello-r <abello-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 10:58:45 by abello-r          #+#    #+#             */
-/*   Updated: 2021/11/13 10:58:48 by abello-r         ###   ########.fr       */
+/*   Updated: 2021/11/19 20:28:59 by abello-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "general.h"
+#include "./includes/general.h"
 
-int main ()
+int	main(int argc, char **argv, char **envp)
 {
-    printf("[Ok]");
-    return (0);
+	char *data;
+
+	(void) argc;
+	(void) argv;
+	(void) envp;
+
+	ft_prompt();
+
+	while (1)
+	{
+		data = readline(BLUE "Minishell: ");
+		free(data);
+	}
+	return (0);
 }

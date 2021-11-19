@@ -1,6 +1,8 @@
 NAME= general.a
 
-SRCS= main.c # Agrega aquí los Sources #
+# Agrega aquí los Sources #
+SRCS=	main.c \
+		srcs/prompt/ft_prompt.c
 
 #####!- Color outputs -!#####
 BLUE=\033[0;34m
@@ -28,7 +30,7 @@ ${NAME}: ${OBJS}
 	@cp ./srcs/Libft/libft.a .
 	@ar -rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
-	$(CC) $(CFLAGS) $(SRCS) libft.a -o minishell
+	$(CC) $(CFLAGS) $(SRCS) libft.a -o minishell -lreadline
 	@mv libft.a ./srcs
 
 all: ${NAME}
@@ -44,7 +46,7 @@ clean:
 	#@${RM} minishell ${OBJS}
 	@clear ; echo "\n${BLUE}${B}"[❄] ... Junk files deleted ... [❄]"\n"
 	@make -sC ./srcs/Libft/ clean
-	@${RM} ${NAME} libft.a 
+	@${RM} ${NAME} libft.a ./srcs/libft.a
 
 fclean:
 	@make clean
