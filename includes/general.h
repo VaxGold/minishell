@@ -7,6 +7,8 @@
 # include <readline/history.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <unistd.h>
+# include <limits.h>
 /******************************/
 
 /******* Colors ***************/
@@ -26,6 +28,28 @@
 # define ARG "Invalid argument"
 /******************************/
 
+/****** Structures ************/
+typedef struct		s_token
+{
+	char		*str;
+	int			type;
+	struct s_token	*prev;
+	struct s_token	*next;
+}					t_token;
+
+typedef struct		s_env
+{
+	char			*value;
+	struct s_env	next;
+}					t_env;
+
+typedef	struct		s_ms
+{
+	t_token			start;
+	t_env			env;
+	
+}					t_ms;
+/******************************/
 
 
 
