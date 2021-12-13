@@ -34,6 +34,15 @@
 
 # define STDIN 0
 # define STDOUT 1
+# define STDERR 2
+
+# define EMPTY 0
+# define EXEC 1
+# define BUILTIN 2
+# define ARG 3
+# define PIPE 4
+//redirecciones
+# define EXIT 9
 
 /*
 ** ERROR TAGS
@@ -43,6 +52,14 @@
 /*
 ** STRUCTURES
 */
+typedef struct		s_token
+{
+	char			*str;
+	int				type;
+	struct s_token	*prev;
+	struct s_token	*next;
+}					t_token;
+
 typedef	struct		s_env
 {
 	char			*value;
@@ -56,6 +73,7 @@ typedef	struct		s_ms
 	int				out;
 	t_env			*env;
 	t_env			*secret;
+	t_token			cmd_line;
 }					t_ms;
 
 /*
