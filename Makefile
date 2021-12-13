@@ -1,8 +1,8 @@
-NAME= general.a
+NAME= minishell.a
 
 # Agrega aquí los Sources #
-SRCS=	main.c \
-		srcs/prompt/ft_prompt.c
+SRCS=	srcs/main/minishell.c \
+		srcs/main/header.c
 
 #####!- Color outputs -!#####
 BLUE=\033[0;34m

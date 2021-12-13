@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abello-r <abello-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 10:58:45 by abello-r          #+#    #+#             */
-/*   Updated: 2021/11/19 20:28:59 by abello-r         ###   ########.fr       */
+/*   Updated: 2021/12/10 20:30:41 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	main(int argc, char **argv, char **envp)
 {
+	t_ms	this;
 	char *data;
 
 	(void) argc;
@@ -22,9 +23,9 @@ int	main(int argc, char **argv, char **envp)
 
 	ft_prompt();
 
-	while (1)
+	while (this.exit == 0)
 	{
-		data = readline(BLUE "Minishell: ");
+		data = readline(BLUE "Minishell:" WHITE" ");
 		free(data);
 	}
 	return (0);

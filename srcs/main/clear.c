@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/06 17:30:37 by omercade          #+#    #+#             */
-/*   Updated: 2021/12/06 17:31:18 by omercade         ###   ########.fr       */
+/*   Created: 2021/12/10 20:41:48 by omercade          #+#    #+#             */
+/*   Updated: 2021/12/10 20:43:01 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/general.h"
+#include "../../includes/minishell.h"
 
-void	ft_exit(char **cmd)
+void	clear()
 {
-	
+	printf("\033[H\033[J");
+	return ;
 }
