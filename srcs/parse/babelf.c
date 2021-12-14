@@ -10,8 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-void	babelf(char	*arg)
+#include "../../includes/parser.h";
+
+int	skip_space(char *str, int index)
 {
-	
+	while (isspace(arg[index]))
+		index++;
+	return (index);
+}
+
+void	babelf(t_ms *minidata)
+{
+	int i;
+
+	ft_strdup(babel_expansions(minidata.buff));
+	ft_lstnew(this.first);
+	while (ft_lstlast(this.first).type == UNION)
+	{
+		//token_master();
+		//token_arguments();
+	}
 	return ;
 }
