@@ -1,5 +1,5 @@
-#ifndef PARSER_H
-# define PARSER_H
+#ifndef PARSE_H
+# define PARSE_H
 
 /*
 ** INCLUDES
@@ -36,21 +36,16 @@
 # define UNERR "Unknown error..."
 
 /*
-** STRUCTURES & ENUMS
+** STRUCTS & ENUMS
 */
-
-/*typedef struct		s_token
-{
-	char			*str;
-	int				type;
-	struct s_token	*prev;
-	struct s_token	*next;
-}					t_token;*/
 
 
 
 /*
 ** FUNCTIONS
 */
+t_token	*babelfish(t_ms minidata, char *buf);
+void	bf_expansions(char *str, t_ms data);
 
+int		skpspace(char *str, int index);
 #endif

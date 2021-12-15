@@ -26,8 +26,8 @@ CC= gcc
 ${NAME}: ${OBJS}
 	@clear
 	@echo "\n${BLUE}${B}"[❄] ... Compiling ... [❄]"${NC}${B}\n"
-	@make -sC ./srcs/Libft/
-	@cp ./srcs/Libft/libft.a .
+	@make -sC ./libs/Libft/
+	@cp ./libs/Libft/libft.a .
 	@ar -rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
 	$(CC) $(CFLAGS) $(SRCS) libft.a -o minishell -lreadline

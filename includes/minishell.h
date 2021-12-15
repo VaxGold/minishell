@@ -4,7 +4,7 @@
 /*
 ** INCLUDES
 */
-# include "../srcs/Libft/libft.h"
+# include "../libs/Libft/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdlib.h>
@@ -42,6 +42,7 @@
 # define ARG 3
 # define PIPE 4
 //redirecciones
+# define UNION 8
 # define EXIT 9
 
 /*

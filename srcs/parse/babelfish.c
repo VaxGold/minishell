@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   take_input.c                                       :+:      :+:    :+:   */
+/*   babelfish.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/10 19:54:19 by omercade          #+#    #+#             */
-/*   Updated: 2021/12/10 20:03:46 by omercade         ###   ########.fr       */
+/*   Created: 2021/12/15 17:40:51 by omercade          #+#    #+#             */
+/*   Updated: 2021/12/15 18:26:38 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../includes/parse.h";
 
-#include "../../includes/general.h"
-
-void    take_input(char* str)
+t_token	*babelfish(t_ms minidata, char *buf)
 {
-    char* buf;
-  
-    buf = readline("\n>>> ");
-    if (strlen(buf) != 0)
-    {
-        add_history(buf);
-        strcpy(str, buf);
-        return ;
-    }
+	int		i;
+	t_token	*ftoken;
+
+	bf_expansions(buf);
+	ft_lstnew(ftoken);
+	while (ft_lstlast(ftoken).type == UNION || ftoken->type == EMPTY)
+	{
+		//i = bf_master(ftoken, buf, i);
+		//i = bf_added(ftoken, buf, i);
+	}
+	return (ftoken);
 }
