@@ -4,16 +4,12 @@
 /*
 ** INCLUDES
 */
-# include "./minishell.h"
-# include <readline/readline.h>
-# include <readline/history.h>
+# include "../libs/Libft/libft.h"
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
 # include <limits.h>
 # include <string.h>
-# include <sys/types.h>
-# include <sys/wait.h>
 
 
 /*
@@ -22,12 +18,10 @@
 # define EMPTY 0
 # define EXEC 1
 # define BUILTIN 2
-# define UNION 3
-# define ARG 4
-/*# define PIPE 4
+# define ARG 3
+# define PIPE 4
 # define REDIR 5
 # define TRUNC 6
-# define FLAG 7*/
 # define EXIT 9
 
 /*
@@ -38,14 +32,18 @@
 /*
 ** STRUCTS & ENUMS
 */
-
+typedef struct		s_token
+{
+	char			*str;
+	int				type;
+}					t_token;
 
 
 /*
 ** FUNCTIONS
 */
-t_token	*babelfish(t_ms minidata, char *buf);
-void	bf_expansions(char *str, t_ms data);
+t_list	*babelfish(char *buf, char **env);
+void	bf_expansions(char *str, char **env);
 
 int		skpspace(char *str, int index);
 #endif

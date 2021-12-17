@@ -5,8 +5,14 @@
 ** INCLUDES
 */
 # include "../libs/Libft/libft.h"
+
+# include "./parse.h"
+# include "./builtins.h"
+# include "./exec.h"
+
 # include <readline/readline.h>
 # include <readline/history.h>
+
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
@@ -36,45 +42,31 @@
 # define STDOUT 1
 # define STDERR 2
 
-# define EMPTY 0
-# define EXEC 1
-# define BUILTIN 2
-# define ARG 3
-# define PIPE 4
-//redirecciones
-# define UNION 8
-# define EXIT 9
 
 /*
 ** ERROR TAGS
 */
-# define ARG "Invalid argument\n"
+# define ERRARG "Invalid argument\n"
 
 /*
 ** STRUCTURES
 */
-typedef struct		s_token
-{
-	char			*str;
-	int				type;
-	struct s_token	*prev;
-	struct s_token	*next;
-}					t_token;
-
-typedef	struct		s_env
-{
-	char			*value;
-	struct s_env	*next;
-}					t_env;
+// typedef struct		s_token
+// {
+// 	char			*str;
+// 	int				type;
+// 	struct s_token	*prev;
+// 	struct s_token	*next;
+// }					t_token;
 
 typedef	struct		s_ms
 {
 	int				exit;
 	int				in;
 	int				out;
-	t_env			*env;
-	t_env			*secret;
-	t_token			cmd_line;
+	char			**env;
+	char			**secret;
+	t_list			*ftoken;
 }					t_ms;
 
 /*

@@ -6,18 +6,18 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 17:41:07 by omercade          #+#    #+#             */
-/*   Updated: 2021/12/15 18:55:25 by omercade         ###   ########.fr       */
+/*   Updated: 2021/12/17 20:49:46 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parse.h";
 
-int		iseov(char *c)
+int	iseov(char *c)
 {
 	if (c < 48)
 		return (0);
 	else if (c >= 65 && c <= 90)
-		return (0)
+		return (0);
 	else if (c >= 97 && c <= 122)
 		return (0);
 	else if (c == '_')
@@ -25,14 +25,14 @@ int		iseov(char *c)
 	return (1);
 }
 
-void exp_insert(char *str, char *mod, char *res)
+void	exp_insert(char *str, char *mod, char *res)
 {
 	int		i;
 	char	*start;
 	char	*end;
 
 	i = 0;
-	while (str[i] != '$' /*&& !quoted_exp(str, i)*/)
+	while (str[i] != '$' /*&& !escaped_exp(str, i)*/)
 		i++;
 	start = ft_strjoin(ft_substr(str, 0, i), res);
 	end = ft_strdup(ft_substr(str, i, ft_strlen(str) - i));
@@ -44,7 +44,7 @@ void exp_insert(char *str, char *mod, char *res)
 
 void	exp_mod(char *expand, char *str, char **env)
 {
-	int i;
+	int		i;
 	char	*mod;
 	char	*temp;
 
@@ -54,7 +54,8 @@ void	exp_mod(char *expand, char *str, char **env)
 	while (env[i])
 	{
 		if (ft_strncmp(temp, env[i], ft_strlen(temp)) == 0)
-			mod = ft_strdup(ft_substr(env[i], ft_strlen(temp), ft_strlen(env[i]) - ft_strlen(temp)));
+			mod = ft_strdup(ft_substr(env[i],
+						ft_strlen(temp), ft_strlen(env[i]) - ft_strlen(temp)));
 		i++;
 	}
 	free(temp);
@@ -63,7 +64,7 @@ void	exp_mod(char *expand, char *str, char **env)
 	return ;
 }
 
-void	bf_expansions(char *str, t_ms data)
+void	bf_expansions(char *str, char **env)
 {
 	int		i;
 	int		control;
@@ -76,15 +77,15 @@ void	bf_expansions(char *str, t_ms data)
 		if (iseov(str[i]) && control != -1)
 		{
 			expand = ft_strdup(ft_substr(str, control, i - control));
-			break;
+			break ;
 		}
-		else if (str[i] == '$' /*&& !quoted_exp(str, i)*/)
+		else if (str[i] == '$' /*&& !escaped_exp(str, i)*/)
 			control = i + 1;
 		i++;
 	}
 	if (control != -1)
 	{
-		exp_mod(expand, str, data);
+		exp_mod(expand, str, env);
 		free(expand);
 		bf_expansions(str, env);
 	}
