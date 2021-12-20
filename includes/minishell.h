@@ -72,6 +72,7 @@ typedef	struct		s_ms
 /*
 ** FUNCTIONS
 */
-void    header(void);
+void	header(void);
+int		ft_exit(char **cmd);
 
 #endif

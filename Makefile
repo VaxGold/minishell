@@ -2,6 +2,7 @@ NAME= minishell.a
 
 # Agrega aquí los Sources #
 SRCS=	srcs/main/minishell.c \
+		srcs/builtins/ft_exit.c \
 		srcs/main/header.c
 
 #####!- Color outputs -!#####
@@ -45,7 +46,7 @@ re: fclean all
 clean:
 	#@${RM} minishell ${OBJS}
 	@clear ; echo "\n${BLUE}${B}"[❄] ... Junk files deleted ... [❄]"\n"
-	@make -sC ./srcs/Libft/ clean
+	@make -sC ./libs/Libft/ clean
 	@${RM} ${NAME} libft.a ./srcs/libft.a
 
 fclean:

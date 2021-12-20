@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 20:23:32 by omercade          #+#    #+#             */
-/*   Updated: 2021/12/13 20:44:55 by omercade         ###   ########.fr       */
+/*   Updated: 2021/12/20 20:03:20 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,18 @@ int	main(int narg, char **xarg, char **env)
 {
 	t_ms	this;
 	char	*buf;
+	char	**test;
 
+	char	*num = "5";
+
+	test = malloc(sizeof(char *) * 2);
+	test[0] = num;
+	test[1] = "\0";
 	//(void) narg;
 	(void) xarg;
 	(void) env;		//DELETE!
 	if (narg != 1)
-		return (!printf(ARG));
+		return (!printf("ARGS ERROR!!\n"));
 	/*INITIALIZE*/
 	this.exit = 0;
 	this.in = dup(STDIN);
@@ -36,8 +42,10 @@ int	main(int narg, char **xarg, char **env)
 		if (strlen(buf) != 0)
         	add_history(buf);
 		else
-				//pruebas
-		//babelf(buff);		//Parser
+		{
+			this.exit = ft_exit(test);	//pruebas
+		}
+		//this.ftoken = babelf(buff);		//Parser
 		free(buf);
 	}
 	/*FREES*/
