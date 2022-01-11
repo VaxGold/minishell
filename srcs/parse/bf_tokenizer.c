@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bf_master.c                                        :+:      :+:    :+:   */
+/*   bf_tokenizer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/15 17:56:07 by omercade          #+#    #+#             */
-/*   Updated: 2021/12/20 20:56:47 by omercade         ###   ########.fr       */
+/*   Created: 2022/01/11 19:31:59 by omercade          #+#    #+#             */
+/*   Updated: 2022/01/11 20:37:25 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parse.h";
 
-void	bf_master(char *buf)
+void	bf_tokenizer(t_list	*first)
 {
-	char	**raw;
-
-	ft_split(buf, ' ');
-	//smart_split(" ");		//controlar las comillas dobles y simples
-
+	
+	return ;
 }

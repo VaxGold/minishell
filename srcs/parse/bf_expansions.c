@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 17:41:07 by omercade          #+#    #+#             */
-/*   Updated: 2021/12/20 20:56:46 by omercade         ###   ########.fr       */
+/*   Updated: 2022/01/11 20:37:23 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,24 @@ int	iseov(char *c)
 	return (1);
 }
 
+int	escaped_exp(char *str, int cpos)
+{
+	int i;
+	int escaped;
+
+	i = 0;
+	escaped = 0;
+	while (str[i] != 0)
+	{
+		if (str[i] == '\'')
+			escaped = !escaped;
+		else if (i == cpos && escaped)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 void	exp_insert(char *str, char *mod, char *res)
 {
 	int		i;
@@ -32,7 +50,7 @@ void	exp_insert(char *str, char *mod, char *res)
 	char	*end;
 
 	i = 0;
-	while (str[i] != '$' /*&& !escaped_exp(str, i)*/)
+	while (str[i] != '$' && !escaped_exp(str, i))
 		i++;
 	start = ft_strjoin(ft_substr(str, 0, i), res);
 	end = ft_strdup(ft_substr(str, i, ft_strlen(str) - i));
@@ -79,7 +97,7 @@ void	bf_expansions(char *str, char **env)
 			expand = ft_strdup(ft_substr(str, control, i - control));
 			break ;
 		}
-		else if (str[i] == '$' /*&& !escaped_exp(str, i)*/)
+		else if (str[i] == '$' && !escaped_exp(str, i))
 			control = i + 1;
 		i++;
 	}

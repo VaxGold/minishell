@@ -6,30 +6,38 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 17:40:51 by omercade          #+#    #+#             */
-/*   Updated: 2021/12/17 20:49:48 by omercade         ###   ########.fr       */
+/*   Updated: 2022/01/11 20:15:17 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parse.h";
 
-// void	bf_tokenizer()
-// {
-
-// }
+void	space_correction(char *buf)
+{
+	return ;
+}
 
 t_list	*babelfish(char *buf, char **env)
 {
 	int		i;
 	t_list	*ftoken;
+	t_list	*temp;
 
-	
-	bf_expansions(buf, env);
-	ftoken = ft_lstnew(NULL);
-	while (((t_token *)(ft_lstlast(ftoken)->content))->type == PIPE
-				|| ((t_token *)(ftoken->content))->type == EMPTY)
+	space_correction(buf);
+	ftoken = bf_split(buf);
+	temp = ftoken;
+	while (temp != NULL)
 	{
-		//i = bf_master(ftoken, buf, i);
-		//i = bf_added(ftoken, buf, i);
+		bf_expansions(((t_token *)(temp->content))->str, env);
+		temp = temp->next;
 	}
+	// free(temp);
+	bf_tokenizer(ftoken);
 	return (ftoken);
 }
+
+
+	// while (((t_token *)(ft_lstlast(ftoken)->content))->type == PIPE
+	// 			|| ((t_token *)(ftoken->content))->type == EMPTY)
+	// {
+	// }

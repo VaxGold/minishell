@@ -38,12 +38,22 @@ typedef struct		s_token
 	int				type;
 }					t_token;
 
+typedef	struct		s_spliter
+{
+	int				start;
+	int				end;
+	int				squoted;
+	int				quoted;
+}					t_spliter;
+
 
 /*
 ** FUNCTIONS
 */
 t_list	*babelfish(char *buf, char **env);
+t_list	*bf_split(char *buf);
 void	bf_expansions(char *str, char **env);
+void	bf_tokenizer(t_list	*first);
 
 int		skpspace(char *str, int index);
 #endif
