@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 20:23:32 by omercade          #+#    #+#             */
-/*   Updated: 2021/12/20 20:56:45 by omercade         ###   ########.fr       */
+/*   Updated: 2022/01/17 20:28:12 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,8 @@ int	main(int narg, char **xarg, char **env)
 {
 	t_ms	this;
 	char	*buf;
-	char	**test;
 
-	char	*num = "5";
 
-	test = malloc(sizeof(char *) * 2);
-	test[0] = num;
-	test[1] = "\0";
 	//(void) narg;
 	(void) xarg;
 	(void) env;		//DELETE!
@@ -43,9 +38,9 @@ int	main(int narg, char **xarg, char **env)
         	add_history(buf);
 		else
 		{
-			this.exit = ft_exit(test);	//pruebas
+			this.exit = 1;	//pruebas
 		}
-		//this.ftoken = babelf(buff);		//Parser
+		this.ftoken = babelfish(ft_strjoin(buf, "\0"), env);		//PARSER
 		free(buf);
 	}
 	/*FREES*/

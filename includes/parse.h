@@ -42,8 +42,6 @@ typedef	struct		s_spliter
 {
 	int				start;
 	int				end;
-	int				squoted;
-	int				quoted;
 }					t_spliter;
 
 
@@ -51,7 +49,8 @@ typedef	struct		s_spliter
 ** FUNCTIONS
 */
 t_list	*babelfish(char *buf, char **env);
-t_list	*bf_split(char *buf);
+t_list	*bf_split(char *buf, int *quotes);
+int		*bf_escapes(int *this, char *str);
 void	bf_expansions(char *str, char **env);
 void	bf_tokenizer(t_list	*first);
 

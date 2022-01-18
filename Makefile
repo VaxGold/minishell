@@ -1,9 +1,22 @@
 NAME= minishell.a
 
 # Agrega aquí los Sources #
-SRCS=	srcs/main/minishell.c \
-		srcs/builtins/ft_exit.c \
-		srcs/main/header.c
+BUILTINS = ft_exit
+
+EXEC = 
+
+MAIN = header minishell
+
+PARSE = babelfish bf_expansions bf_split bf_tokenizer bf_escapes
+
+TOOLS = 
+
+SRCS=	$(addsuffix .c, $(addprefix srcs/builtins/, $(BUILTINS))) \
+		$(addsuffix .c, $(addprefix srcs/exec/, $(EXEC))) \
+		$(addsuffix .c, $(addprefix srcs/main/, $(MAIN))) \
+		$(addsuffix .c, $(addprefix srcs/parse/, $(PARSE))) \
+		$(addsuffix .c, $(addprefix srcs/tools/, $(TOOLS)))
+#############################
 
 #####!- Color outputs -!#####
 BLUE=\033[0;34m
@@ -27,7 +40,7 @@ CC= gcc
 ${NAME}: ${OBJS}
 	@clear
 	@echo "\n${BLUE}${B}"[❄] ... Compiling ... [❄]"${NC}${B}\n"
-	@make -sC ./libs/Libft/
+	@make bonus -sC ./libs/Libft/
 	@cp ./libs/Libft/libft.a .
 	@ar -rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
@@ -53,5 +66,5 @@ fclean:
 	@make clean
 	@clear ; echo "\n${BLUE}${B}"[❄] ... Junk files deleted ... [❄]"\n"
 	@${RM} minishell minishell.a ${NAME} ${OBJS}
-	@make -sC ./srcs/Libft/ fclean
+	@make -sC ./libs/Libft/ fclean
 ##############################

@@ -6,8 +6,8 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 17:29:46 by omercade          #+#    #+#             */
-/*   Updated: 2021/12/06 17:31:08 by omercade         ###   ########.fr       */
+/*   Updated: 2022/01/12 18:39:41 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/general.h"
+#include "../../includes/minishell.h"

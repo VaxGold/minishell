@@ -6,13 +6,13 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 17:41:07 by omercade          #+#    #+#             */
-/*   Updated: 2022/01/11 20:37:23 by omercade         ###   ########.fr       */
+/*   Updated: 2022/01/12 18:48:00 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parse.h";
+#include "../../includes/parse.h"
 
-int	iseov(char *c)
+int	iseov(char c)
 {
 	if (c < 48)
 		return (0);
@@ -43,7 +43,7 @@ int	escaped_exp(char *str, int cpos)
 	return (0);
 }
 
-void	exp_insert(char *str, char *mod, char *res)
+void	exp_insert(char *str, char *res)
 {
 	int		i;
 	char	*start;
@@ -77,7 +77,7 @@ void	exp_mod(char *expand, char *str, char **env)
 		i++;
 	}
 	free(temp);
-	exp_insert(str, expand, mod);
+	exp_insert(str, mod);
 	free(mod);
 	return ;
 }
