@@ -51,13 +51,22 @@
 /*
 ** STRUCTURES
 */
-// typedef struct		s_token
+// typedef struct		s_token		//Pertenece a <parse.h>
 // {
 // 	char			*str;
 // 	int				type;
 // 	struct s_token	*prev;
 // 	struct s_token	*next;
 // }					t_token;
+
+// typedef	struct		s_ms		//DEFINITIVA!!!
+// {
+// 	t_list			*token_list;
+// 	char			**env;
+// 	t_list			*exp_list;
+// 	int				status;
+// 	int				exit;
+// }					t_ms;
 
 typedef	struct		s_ms
 {

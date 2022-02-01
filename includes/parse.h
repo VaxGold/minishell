@@ -34,25 +34,29 @@
 */
 typedef struct		s_token
 {
-	char			*str;
-	int				type;
+	char			**args;
+	t_list			*in;
+	t_list			*out;
+	//PIPES & FDs
+	pid_t			pid;
+	int				*fd;
+	int				status;		//ERR_Control
 }					t_token;
 
-typedef	struct		s_spliter
+typedef struct		s_redirect
 {
-	int				start;
-	int				end;
-}					t_spliter;
-
+	char			**args;
+	char			*simbol;
+	int				pos;
+}					t_redirect;
 
 /*
 ** FUNCTIONS
 */
 t_list	*babelfish(char *buf, char **env);
-t_list	*bf_split(char *buf, int *quotes);
-int		*bf_escapes(int *this, char *str);
+t_list	*bf_tokenizer(char *buf, char **env);
+void	bf_split(char *line, t_token *token, t_list *largs, int *quotes);
+int		*bf_escapes(char *str);
 void	bf_expansions(char *str, char **env);
-void	bf_tokenizer(t_list	*first);
 
-int		skpspace(char *str, int index);
 #endif

@@ -6,69 +6,54 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 17:41:39 by omercade          #+#    #+#             */
-/*   Updated: 2022/01/18 18:44:19 by omercade         ###   ########.fr       */
+/*   Updated: 2022/01/27 18:04:24 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parse.h"
 
-void	check_escape(int *this, char *str)
+int	escape_level(int *this, char *str, int i, int set)
 {
-	int	i;
-	int	set;
-
-	i = 0;
-	set = 0;
-	while (str[i] && str[i] != '\n')
+	if (str[i] == '\'')
 	{
-		if (str[i] == '\\')
-		{
-			this[i++] = 3;
-			this[i] = 3;
-		}
-		else if (str[i] == '\'')
-		{
-			if (set == 2)
-				set = 0;
-			else
-				set = 2;
-			this[i] = 2;
-		}
-		else if (str[i] == '\"')
-		{
-			if (set == 2)
-				this[i] = set;
-			else
-			{
-				set = !set;
-				this[i] = 1;
-			}
-		}
+		if (set == 2)
+			set = 0;
 		else
-			this[i] = set;
-		i++;
+			set = 2;
+		this[i] = 2;
 	}
+	else if (str[i] == '\"')
+	{
+		if (set == 2)
+			this[i] = set;
+		else
+		{
+			set = !set;
+			this[i] = 1;
+		}
+	}
+	else
+		this[i] = set;
+	return (set);
 }
 
-int	*bf_escapes(int *this, char *str)
+int	*bf_escapes(char *str)
 {
-	int i;
+	int	*quotes;
+	int	i;
+	int	set;
 	
-	if (this)
-	{
-		this = NULL;
-		free(this);
-	}
-	this = malloc(sizeof(int) * ft_strlen(str));
-	if (!this)
+	quotes = malloc(sizeof(int) * ft_strlen(str));
+	if (!quotes)
 		return (NULL);
-	check_escape(this, str);
-	printf("DISPLAY ESCAPES\n");
+	set = 0;
 	i = 0;
-	while (i < (int)ft_strlen(str))
+	while (str[i])
 	{
-		printf("%d -> %c\n", this[i], str[i]);
+		set = escape_level(quotes, str, i, set);
 		i++;
 	}
-	return (this);
+	if (set != 0)
+		return (NULL);
+	return (quotes);
 }
