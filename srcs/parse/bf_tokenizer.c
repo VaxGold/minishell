@@ -6,46 +6,56 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 19:31:59 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/01 20:58:03 by omercade         ###   ########.fr       */
+/*   Updated: 2022/02/04 20:55:54 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parse.h"
 
-char	**lstargs(t_list *largs)
+char	**lsttoargs(t_list **argst)
 {
+	t_list	*aux;
 	char	**args;
 	int		len;
 	int		i;
 	
-	len = ft_lstsize(largs);
+	len = ft_lstsize(*argst);
 	if (len < 1)
 		return (NULL);
 	args = malloc(sizeof(char *) * (len + 1));
 	if (!args)
 		return (NULL);
 	i = 0;
-	while (largs)
+	aux = *argst;
+	while (aux)
 	{
-		args[i++] = ft_strdup((char *)(largs->content));
-		largs = largs->next;
+		args[i++] = ft_strdup((char *)(aux->content));
+		aux = aux->next;
 	}
-	args[i] = '\0';
+	args[i] = 0;
 	return (args);
 }
 
 t_list	*bf_tokenizer(char *buf, char **env)
 {
-	t_token	new;
-	t_list	*largs;
-	int		*quotes;
+	t_token	*new;
+	t_list	*argst;
 
-	//Alocar token?
-	quotes = bf_escapes(buf);
-	bf_split(buf, &new, largs, quotes);
-	//Comprobar lista de argumentos vacia?
-	new.args = lstargs(largs);
-	ft_lstclear(largs, free);
-	free(quotes);
-	return(ft_lstnew(&new));
+	if (ft_strlen(buf) <= 0)			//Buffer vacio??
+		return (NULL);
+	new = malloc(sizeof(t_token));
+	if (!new)
+		return (NULL);
+	new->in = NULL;
+	new->out = NULL;
+	argst = NULL;
+	bf_split(buf, new, &argst, env);		//No tiene salida??
+	if (argst != NULL)
+	{
+		new->args = lsttoargs(&argst);
+		ft_lstclear(&argst, free);
+	}
+	else
+		 new->args = NULL;
+	return(ft_lstnew(new));
 }

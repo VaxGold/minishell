@@ -29,7 +29,7 @@ B=`tput bold`
 
 
 ####!- General VARS -!#######
-CFLAGS= -Wall -Werror -Wextra
+CFLAGS= -Wall -Werror -Wextra #-g3 -fsanitize=address
 OBJS= ${SRCS:.c=.o}
 RM= rm -f
 CC= gcc

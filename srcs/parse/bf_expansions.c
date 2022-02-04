@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 17:41:07 by omercade          #+#    #+#             */
-/*   Updated: 2022/01/24 20:49:03 by omercade         ###   ########.fr       */
+/*   Updated: 2022/02/04 21:00:39 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,23 @@ int	iseov(char c)
 	return (1);
 }
 
-int	escaped_exp(char *str, int cpos)
-{
-	int i;
-	int escaped;
+// int	escaped_exp(char *str, int cpos)
+// {
+// 	int i;
+// 	int escaped;
 
-	i = 0;
-	escaped = 0;
-	while (str[i] != 0)
-	{
-		if (str[i] == '\'')
-			escaped = !escaped;
-		else if (i == cpos && escaped)
-			return (1);
-		i++;
-	}
-	return (0);
-}
+// 	i = 0;
+// 	escaped = 0;
+// 	while (str[i] != 0)
+// 	{
+// 		if (str[i] == '\'')
+// 			escaped = !escaped;
+// 		else if (i == cpos && escaped)
+// 			return (1);
+// 		i++;
+// 	}
+// 	return (0);
+// }
 
 void	exp_insert(char *str, char *res)
 {

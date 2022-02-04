@@ -75,7 +75,7 @@ typedef	struct		s_ms
 	int				out;
 	char			**env;
 	char			**secret;
-	t_list			*ftoken;
+	t_list			*tokenst;
 }					t_ms;
 
 /*
