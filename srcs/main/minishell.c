@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 20:23:32 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/02 20:34:58 by omercade         ###   ########.fr       */
+/*   Updated: 2022/02/08 17:45:35 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int narg, char **xarg, char **env)
 
 	//(void) narg;
 	(void) xarg;
-	(void) env;		//DELETE!
+	//(void) env;		//DELETE!
 	if (narg != 1)
 		return (!printf("ARGS ERROR!!\n"));
 	/*INITIALIZE*/
@@ -41,6 +41,7 @@ int	main(int narg, char **xarg, char **env)
 			this.exit = 1;	//pruebas
 		}
 		this.tokenst = babelfish(ft_strjoin(buf, "\0"), env);		//PARSER
+		//executioner(this);
 		free(buf);
 	}
 	/*FREES*/
