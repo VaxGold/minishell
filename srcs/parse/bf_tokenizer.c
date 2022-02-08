@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 19:31:59 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/04 20:55:54 by omercade         ###   ########.fr       */
+/*   Updated: 2022/02/04 21:19:57 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ t_list	*bf_tokenizer(char *buf, char **env)
 	t_list	*argst;
 
 	if (ft_strlen(buf) <= 0)			//Buffer vacio??
+	{
+		free (buf);
 		return (NULL);
+	}
 	new = malloc(sizeof(t_token));
 	if (!new)
 		return (NULL);
@@ -57,5 +60,6 @@ t_list	*bf_tokenizer(char *buf, char **env)
 	}
 	else
 		 new->args = NULL;
+	free (buf);
 	return(ft_lstnew(new));
 }

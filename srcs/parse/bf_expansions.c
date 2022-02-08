@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 17:41:07 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/04 21:00:39 by omercade         ###   ########.fr       */
+/*   Updated: 2022/02/07 21:26:56 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 int	iseov(char c)
 {
-	if (c < 48)
+	if (c == 0)
+		return (1);
+	else if (c < 48)
 		return (0);
 	else if (c >= 65 && c <= 90)
 		return (0);
@@ -25,42 +27,7 @@ int	iseov(char c)
 	return (1);
 }
 
-// int	escaped_exp(char *str, int cpos)
-// {
-// 	int i;
-// 	int escaped;
-
-// 	i = 0;
-// 	escaped = 0;
-// 	while (str[i] != 0)
-// 	{
-// 		if (str[i] == '\'')
-// 			escaped = !escaped;
-// 		else if (i == cpos && escaped)
-// 			return (1);
-// 		i++;
-// 	}
-// 	return (0);
-// }
-
-void	exp_insert(char *str, char *res)
-{
-	int		i;
-	char	*start;
-	char	*end;
-
-	i = 0;
-	while (str[i] != '$' && !escaped_exp(str, i))
-		i++;
-	start = ft_strjoin(ft_substr(str, 0, i), res);
-	end = ft_strdup(ft_substr(str, i, ft_strlen(str) - i));
-	str = ft_strjoin(start, end);
-	free(start);
-	free(end);
-	return ;
-}
-
-void	exp_mod(char *expand, char *str, char **env)
+char	*exp_variable(char *expand, char **env)
 {
 	int		i;
 	char	*mod;
@@ -76,36 +43,58 @@ void	exp_mod(char *expand, char *str, char **env)
 						ft_strlen(temp), ft_strlen(env[i]) - ft_strlen(temp)));
 		i++;
 	}
+	free(expand);
 	free(temp);
-	exp_insert(str, mod);
-	free(mod);
-	return ;
+	return (mod);
 }
 
-void	bf_expansions(char *str, char **env)
+char	*exp_contructor(char *str, int start, int len, char **env)
 {
-	int		i;
-	int		control;
-	char	*expand;
+	char	*aux;
+	char	*end;
+	char	*res;
 
+	res = ft_substr(str, 0, start);
+	end = exp_variable(ft_substr(str, start + 1, len - 1), env);
+	aux = ft_strjoin(res, end);
+	free(res);
+	free(end);
+	end = ft_substr(str, len, ft_strlen(str) - len);
+	res = ft_strjoin(aux, end);
+	free(aux);
+	free(end);
+	free(str);
+	return (res);
+}
+
+char	*bf_expansions(char *str, char **env)
+{
+	int	*quotes;
+	int	i;
+	int	start;
+	int	len;
+	char	*res;
+
+	quotes = bf_escapes(str);
 	i = 0;
-	control = -1;
-	while (str[i] != 0)
+	start = -1;
+	len = 0;
+	while (str[i])
 	{
-		if (iseov(str[i]) && control != -1)
+		if ((iseov(str[i]) || str[i + 1] == 0) && start != -1)
 		{
-			expand = ft_strdup(ft_substr(str, control, i - control));
+			len = i - start + 1;
 			break ;
 		}
-		else if (str[i] == '$' && !escaped_exp(str, i))
-			control = i + 1;
+		else if (str[i] == '$' && quotes[i] < 2)
+			start = i;
 		i++;
 	}
-	if (control != -1)
-	{
-		exp_mod(expand, str, env);
-		free(expand);
-		bf_expansions(str, env);
-	}
-	return ;
+	free(quotes);
+	if (start == -1)
+		return (str);
+	res = exp_contructor(str, start, len, env);			//Sustitucion de la variable de entorno
+	res = bf_expansions(res, env);
+	return (res);
+	//return (bf_expansions(res, env));				//Recursivo desactivado
 }

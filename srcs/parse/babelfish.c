@@ -6,12 +6,13 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 17:40:51 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/04 20:38:22 by omercade         ###   ########.fr       */
+/*   Updated: 2022/02/07 18:28:56 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parse.h"
 
+/* 				DISPLAY FUNCTIONS				*/
 void	display_array(char **arr, char *str)
 {
 	int	i;
@@ -71,6 +72,7 @@ void	display_tokens(t_list *token)
 	}
 	return ;
 }
+/*				--------------------------				*/
 
 t_list	*babelfish(char *buf, char **env)
 {
