@@ -39,7 +39,7 @@ typedef struct		s_token
 	t_list			*out;
 	//PIPES & FDs
 	pid_t			pid;
-	int				*fd;
+	int				fd[2];
 	int				status;		//ERR_Control
 }					t_token;
 

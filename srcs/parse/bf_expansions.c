@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 17:41:07 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/07 21:26:56 by omercade         ###   ########.fr       */
+/*   Updated: 2022/02/09 17:24:07 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	*exp_contructor(char *str, int start, int len, char **env)
 	aux = ft_strjoin(res, end);
 	free(res);
 	free(end);
-	end = ft_substr(str, len, ft_strlen(str) - len);
+	end = ft_substr(str, start + len, ft_strlen(str) - len);
 	res = ft_strjoin(aux, end);
 	free(aux);
 	free(end);
