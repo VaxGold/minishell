@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adiaz-do <adiaz-do@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 20:41:48 by omercade          #+#    #+#             */
-/*   Updated: 2021/12/10 20:43:01 by omercade         ###   ########.fr       */
+/*   Updated: 2022/02/10 19:50:29 by adiaz-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	clear()
+void	clear(void)
 {
 	printf("\033[H\033[J");
 	return ;

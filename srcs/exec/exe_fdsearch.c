@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe_fdsearch.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adiaz-do <adiaz-do@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 21:43:47 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/08 21:48:23 by omercade         ###   ########.fr       */
+/*   Updated: 2022/02/10 19:57:34 by adiaz-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	exe_fdsearch(t_ms *this)
 {
-	t_list *aux;
+	t_list	*aux;
 
 	aux = this->tokenst;
 	while (aux)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bf_tokenizer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adiaz-do <adiaz-do@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 19:31:59 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/04 21:19:57 by omercade         ###   ########.fr       */
+/*   Updated: 2022/02/10 19:52:02 by adiaz-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,5 @@ t_list	*bf_tokenizer(char *buf, char **env)
 	else
 		 new->args = NULL;
 	free (buf);
-	return(ft_lstnew(new));
+	return (ft_lstnew(new));
 }
