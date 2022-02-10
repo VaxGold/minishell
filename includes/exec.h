@@ -7,6 +7,7 @@
 # include "../libs/Libft/libft.h"
 # include "parse.h"
 # include "minishell.h"
+# include <unistd.h>
 
 
 
@@ -28,5 +29,6 @@
 /*
 ** FUNCTIONS
 */
+void	execalibur(t_ms *this);
 
 #endif

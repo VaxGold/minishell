@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 20:23:32 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/08 20:53:18 by omercade         ###   ########.fr       */
+/*   Updated: 2022/02/10 17:23:22 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(int narg, char **xarg, char **env)
 	this.exit = 0;
 	this.in = dup(STDIN);
 	this.out = dup(STDOUT);
+	this.env = env;
 	//reset_fds
 	//set_env & set_secret_env
 	/*END_INIT*/
@@ -41,7 +42,7 @@ int	main(int narg, char **xarg, char **env)
 			this.exit = 1;	//pruebas
 		}
 		this.tokenst = babelfish(ft_strjoin(buf, "\0"), env);		//PARSER
-		//executioner(this);
+		execalibur(&this);
 		free(buf);
 	}
 	/*FREES*/

@@ -8,7 +8,6 @@
 
 # include "./parse.h"
 # include "./builtins.h"
-# include "./exec.h"
 
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -59,15 +58,6 @@
 // 	struct s_token	*next;
 // }					t_token;
 
-// typedef	struct		s_ms		//DEFINITIVA!!!
-// {
-// 	t_list			*token_list;
-// 	char			**env;
-// 	t_list			*exp_list;
-// 	int				status;
-// 	int				exit;
-// }					t_ms;
-
 typedef	struct		s_ms
 {
 	int				exit;
@@ -83,5 +73,12 @@ typedef	struct		s_ms
 */
 void	header(void);
 int		ft_exit(char **cmd);
+
+void	execalibur(t_ms *this);
+void	exe_process(t_token *token, char **env);
+void	exe_pipeset(t_ms *this);
+
+void	secure_free(char *str);
+void	free_strarr(char **array);
 
 #endif
