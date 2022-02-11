@@ -3,11 +3,11 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adiaz-do <adiaz-do@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 17:30:10 by omercade          #+#    #+#             */
-/*   Updated: 2021/12/06 17:31:21 by omercade         ###   ########.fr       */
+/*   Updated: 2022/02/11 15:56:59 by adiaz-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/general.h"
+#include "../../includes/builtins.h"

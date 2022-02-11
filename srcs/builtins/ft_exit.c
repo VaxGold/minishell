@@ -6,11 +6,11 @@
 /*   By: adiaz-do <adiaz-do@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 17:30:37 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/10 19:57:19 by adiaz-do         ###   ########.fr       */
+/*   Updated: 2022/02/11 15:56:55 by adiaz-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../includes/builtins.h"
 
 int ft_array_len(char **cmd)
 {

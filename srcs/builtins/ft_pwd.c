@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adiaz-do <adiaz-do@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 17:30:43 by omercade          #+#    #+#             */
-/*   Updated: 2021/12/10 20:05:25 by omercade         ###   ########.fr       */
+/*   Updated: 2022/02/11 15:57:01 by adiaz-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/general.h"
+#include "../../includes/builtins.h"
 
 int	ft_pwd(void)
 {

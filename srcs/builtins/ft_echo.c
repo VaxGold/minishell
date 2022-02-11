@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adiaz-do <adiaz-do@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 17:28:37 by omercade          #+#    #+#             */
-/*   Updated: 2021/12/06 17:32:37 by omercade         ###   ########.fr       */
+/*   Updated: 2022/02/11 15:56:51 by adiaz-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/general.h"
+#include "../../includes/builtins.h"
 
 int	n_args(char **args)
 {
