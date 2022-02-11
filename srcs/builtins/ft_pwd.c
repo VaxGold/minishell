@@ -6,7 +6,7 @@
 /*   By: adiaz-do <adiaz-do@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 17:30:43 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/11 15:57:01 by adiaz-do         ###   ########.fr       */
+/*   Updated: 2022/02/11 18:11:19 by adiaz-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,3 @@ int	ft_pwd(void)
 	else
 		return (1);
 }
-
-// void printDir()
-// {
-//     char cwd[1024];
-//     getcwd(cwd, sizeof(cwd));
-//     printf("\nDir: %s", cwd);
-// }
