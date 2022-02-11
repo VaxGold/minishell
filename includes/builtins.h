@@ -6,7 +6,7 @@
 /*   By: adiaz-do <adiaz-do@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 16:47:22 by adiaz-do          #+#    #+#             */
-/*   Updated: 2022/02/11 16:52:12 by adiaz-do         ###   ########.fr       */
+/*   Updated: 2022/02/11 17:41:26 by adiaz-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 
 # include <readline/readline.h>
 # include <readline/history.h>
-
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
@@ -32,9 +31,20 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 
+
+typedef	struct		t_build
+{
+	int				exit;
+	int				in;
+	int				out;
+	char			**env;
+	char			**secret;
+	t_list			*tokenst;
+}					t_build;
+
 int	ft_echo(char **args);
 int ft_exit(char **cmd);
-int	ft_env(t_env *env);
+int	ft_env(t_build *env);
 int	ft_pwd(void);
 
 #endif
