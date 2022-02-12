@@ -6,7 +6,7 @@
 /*   By: adiaz-do <adiaz-do@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 17:30:37 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/11 17:57:10 by adiaz-do         ###   ########.fr       */
+/*   Updated: 2022/02/11 18:15:35 by adiaz-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int ft_exit(char **cmd)
     int num;
 
     num = 0;
-    if (!cmd)
+    if  (!cmd)
         return(!(printf("exit\n")));
-    if (ft_array_len(cmd) == 1)
+    if  (ft_array_len(cmd) == 1)
     {
         while (ft_isdigit(cmd[0][num]))
             num++;
