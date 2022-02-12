@@ -6,90 +6,138 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 18:07:23 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/10 19:36:17 by omercade         ###   ########.fr       */
+/*   Updated: 2022/02/12 18:21:00 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	*menu_builtins(void)
+//TEST
+void	exe_pipeset(t_ms *this)
 {
-	void	(**menu)(t_ms *);
+	t_list	*aux;
+	int		i;
 
-	menu = malloc(sizeof(*menu) * 8);
-	menu[0] = &ft_cd;
-	menu[1] = &ft_echo;
-	menu[2] = &ft_env;
-	menu[3] = &ft_export;
-	menu[4] = &ft_pwd;
-	menu[5] = &ft_unset;
-	menu[6] = &ft_exit;
-	menu[7] = (void *)0;
-	return (menu);
+	i = 0;
+	if (ft_lstsize(this->tokenst) < 2)
+		return ;
+	aux = this->tokenst;
+	while (aux)
+	{
+		if (i != 0)
+			pipe(((t_token *)aux)->fd);
+		aux = aux->next;
+		i++;
+	}
 }
 
-int	search_builtins(t_token token)
-{
-	char	*cmd;
+// void	exe_cmd(t_list	*elem_lst, char **env, int fdin, int fdout)
+// {
+// 	t_token	*token;
 
-	cmd = token.args[0];	
-	if (!ft_strcmp("cd\0", cmd))
-		return (0);
-	if (!ft_strcmp("echo\0", cmd))
-		return (1);
-	if (!ft_strcmp("env\0", cmd))
-		return (2);
-	if (!ft_strcmp("export\0", cmd))
-		return (3);
-	if (!ft_strcmp("pwd\0", cmd))
-		return (4);
-	if (!ft_strcmp("unset\0", cmd))
-		return (5);
-	if (!ft_strcmp("exit\0", cmd))
-		return (6);
-	return (-1);
+// 	token = (t_token *)(elem_lst->content);
+// 	token->pid = fork();
+// 	if (token->pid)
+// 	{
+		
+// 	}
+// 	else
+// 	{
+		
+// 	}
+// }
+
+void	redir (t_list *elem_lst, char **env, int fdin)
+{
+	t_token *token;
+
+	token = (t_token *)(elem_lst->content);
+	token->pid = fork();
+	if (token->pid)
+	{
+		close(token->fd[1]);
+		dup2(token->fd[0], STDIN);
+		waitpid(token->pid, NULL, 0);
+	}
+	else
+	{
+		close(token->fd[0]);
+		dup2(((t_token *)(elem_lst->next->content))->fd[1], STDOUT);
+		if (fdin == STDIN)
+			exit(1);
+		else
+			exe_process(token, env);
+	}
 }
 
 void	execalibur(t_ms *this)
 {
-	t_list	*aux;
-	int		opc;
+	t_list *aux;
 
+	exe_pipeset(this);
 	aux = this->tokenst;
-	//opc = isbuiltin();
-	if (opc == -1)		//command!!
+	// dup2(fdin, STDIN);
+	// dup2(fdout, STDOUT);
+	printf("FIRST_PROCES\n");
+	redir(aux, this->env, 1);
+	aux = aux->next;
+	while (aux && aux->next)
 	{
-		pipe(((t_token *)(aux->content))->fd);
-		((t_token *)(aux->content))->pid = fork();
-		if (((t_token *)(aux->content))->pid < 0)
-			exit(17);	//Revisar el error
-		else if (((t_token *)(aux->content))->pid == 0)
-			exe_process(((t_token *)(aux->content)), this->env);
-		else
-		{
-			waitpid(((t_token *)(aux->content))->pid, &((t_token *)(aux->content))->status, 0);
-			//check_err
-		}
+		printf("N_PROCES\n");
+		redir(aux, this->env, 1);
+		aux = aux->next;
 	}
-	else
-		//builtin!!
+	if (aux)
+	{
+		printf("LAST_PROCES\n");
+		exe_process((t_token *)(aux->content), this->env);
+	}
 }
 
 //FUNCIONAL
+// void	redir (t_list *elem_lst, char **env, int fdin)
+// {
+// 	t_token *token;
 
-void	execalibur(t_ms *this)
-{
-	t_list	*aux;
+// 	token = (t_token *)(elem_lst->content);
+// 	token->pid = fork();
+// 	if (token->pid)
+// 	{
+// 		close(token->fd[1]);
+// 		dup2(token->fd[0], STDIN);
+// 		waitpid(token->pid, NULL, 0);
+// 	}
+// 	else
+// 	{
+// 		close(token->fd[0]);
+// 		dup2(((t_token *)(elem_lst->next->content))->fd[1], STDOUT);
+// 		if (fdin == STDIN)
+// 			exit(1);
+// 		else
+// 			exe_process(token, env);
+// 	}
+// }
 
-	aux = this->tokenst;
-	((t_token *)(aux->content))->pid = fork();
-	if (((t_token *)(aux->content))->pid < 0)
-		exit(17);	//Revisar el error
-	else if (((t_token *)(aux->content))->pid == 0)
-		exe_process(((t_token *)(aux->content)), this->env);
-	else
-	{
-		waitpid(((t_token *)(aux->content))->pid, &((t_token *)(aux->content))->status, 0);
-		//printf("Im are your father\n");
-	}
-}
+// void	execalibur(t_ms *this)
+// {
+// 	t_list *aux;
+
+// 	exe_pipeset(this);
+// 	aux = this->tokenst;
+// 	// dup2(fdin, STDIN);
+// 	// dup2(fdout, STDOUT);
+// 	printf("FIRST_PROCES\n");
+// 	redir(aux, this->env, 1);
+// 	aux = aux->next;
+// 	while (aux && aux->next)
+// 	{
+// 		printf("N_PROCES\n");
+// 		redir(aux, this->env, 1);
+// 		aux = aux->next;
+// 	}
+// 	if (aux)
+// 	{
+// 		printf("LAST_PROCES\n");
+// 		exe_process((t_token *)(aux->content), this->env);
+// 	}
+// }

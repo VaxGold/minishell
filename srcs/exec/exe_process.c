@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 18:55:41 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/09 19:59:59 by omercade         ###   ########.fr       */
+/*   Updated: 2022/02/11 18:56:42 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	exe_process(t_token *token, char **env)
 	char *cmd_route;
 
 	cmd_route = path_finder(token->args[0], env);
+	printf("CMD ROUTE: %s\n", cmd_route);
 	execve(cmd_route, token->args, env);
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(token->args[0], 2);

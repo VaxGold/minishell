@@ -1,9 +1,9 @@
 NAME= minishell.a
 
 # Agrega aquí los Sources #
-BUILTINS = ft_exit
+BUILTINS = 
 
-EXEC = execalibur exe_process exe_pipeset
+EXEC = execalibur exe_process
 
 MAIN = header minishell
 

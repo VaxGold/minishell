@@ -29,6 +29,5 @@
 /*
 ** FUNCTIONS
 */
-void	execalibur(t_ms *this);
 
 #endif

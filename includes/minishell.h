@@ -76,7 +76,6 @@ int		ft_exit(char **cmd);
 
 void	execalibur(t_ms *this);
 void	exe_process(t_token *token, char **env);
-void	exe_pipeset(t_ms *this);
 
 void	secure_free(char *str);
 void	free_strarr(char **array);
