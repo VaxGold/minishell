@@ -6,7 +6,7 @@
 /*   By: adiaz-do <adiaz-do@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 12:49:42 by abello-r          #+#    #+#             */
-/*   Updated: 2022/02/12 18:12:40 by adiaz-do         ###   ########.fr       */
+/*   Updated: 2022/02/12 18:13:31 by adiaz-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,5 @@ void	ft_putnbr_fd(int n, int fd)
 	}
 	if (i > 9)
 		ft_putnbr_fd(i / 10, fd);
-	ft_putchar(i % 10 + 48, fd);
+	ft_putchar_fd(i % 10 + 48, fd);
 }
