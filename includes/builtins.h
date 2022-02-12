@@ -6,7 +6,7 @@
 /*   By: adiaz-do <adiaz-do@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 16:47:22 by adiaz-do          #+#    #+#             */
-/*   Updated: 2022/02/11 18:13:24 by adiaz-do         ###   ########.fr       */
+/*   Updated: 2022/02/12 18:09:39 by adiaz-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 
-typedef	struct      t_build
+typedef	struct      s_build
 {
     char            *next;
     char            *value;
