@@ -4,7 +4,7 @@
 /*
 ** INCLUDES
 */
-# include "../libs/Libft/libft.h"
+# include "../Libft/libft.h"
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>

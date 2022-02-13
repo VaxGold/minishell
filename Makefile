@@ -40,8 +40,8 @@ CC= gcc
 ${NAME}: ${OBJS}
 	@clear
 	@echo "\n${BLUE}${B}"[❄] ... Compiling ... [❄]"${NC}${B}\n"
-	@make bonus -sC ./libs/Libft/
-	@cp ./libs/Libft/libft.a .
+	@make bonus -sC ./Libft/
+	@cp ./Libft/libft.a .
 	@ar -rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
 	$(CC) $(CFLAGS) $(SRCS) libft.a -o minishell -lreadline
@@ -59,12 +59,12 @@ re: fclean all
 clean:
 	#@${RM} minishell ${OBJS}
 	@clear ; echo "\n${BLUE}${B}"[❄] ... Junk files deleted ... [❄]"\n"
-	@make -sC ./libs/Libft/ clean
+	@make -sC ./Libft/ clean
 	@${RM} ${NAME} libft.a ./srcs/libft.a
 
 fclean:
 	@make clean
 	@clear ; echo "\n${BLUE}${B}"[❄] ... Junk files deleted ... [❄]"\n"
 	@${RM} minishell minishell.a ${NAME} ${OBJS}
-	@make -sC ./libs/Libft/ fclean
+	@make -sC ./Libft/ fclean
 ##############################
