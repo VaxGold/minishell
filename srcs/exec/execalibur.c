@@ -6,14 +6,14 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 18:07:23 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/12 19:39:44 by omercade         ###   ########.fr       */
+/*   Updated: 2022/02/14 19:01:06 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 //------>FUNCIONAL<------//
-void	init_pipes(t_ms *this)
+void	init_pipes(t_ms *this)			//Delete?
 {
 	t_list	*aux;
 	int		i;
@@ -85,17 +85,24 @@ void	execalibur(t_ms *this)
 
 	aux = this->tokenst;
 
-	//1ST PROCESS
+	//==1ST PROCESS==//
 	printf("FIRST PROCESS\n");
 	if (aux->next)
 	{
 		pipe(((t_token *)(aux->next->content))->fd);
-		//
+		//	↑ Done!				↓ Not finished...
 		((t_token *)(aux->content))->pid = fork();
+		//Check fork error!!
 		if (!((t_token *)(aux->content))->pid)
+		{
+			dup2(((t_token *)(aux->next->content))->fd[1], STDOUT_FILENO);
+			close(((t_token *)(aux->next->content))->fd[0]);
+			close(((t_token *)(aux->next->content))->fd[1]);
 			exe_process((t_token *)(aux->content), this->env);
+		}
 		else
 			waitpid(((t_token *)(aux->content))->pid, NULL, 0);
+		//	END EXE_OPEN_PROCESS
 	}
 	else
 	{
@@ -107,26 +114,39 @@ void	execalibur(t_ms *this)
 	}
 	aux = aux->next;
 
-	//MULTI-PROCESS
+	//==MULTI-PROCESS==//
+	int i = 1;			//*Depuracion*
 	while (aux && aux->next)
 	{
-		printf("MULTI-PROCESS\n");
+		printf("MULTI-PROCESS #%d\n", i);
+		pipe(((t_token *)(aux->next->content))->fd);
+		//	↑ Done!				↓ Not finished...
 		((t_token *)(aux->content))->pid = fork();
 		if (!((t_token *)(aux->content))->pid)
 			exe_process((t_token *)(aux->content), this->env);
 		else
 			waitpid(((t_token *)(aux->content))->pid, NULL, 0);
+		//	END EXE_MULTI-PROCESS
 		aux = aux->next;
+		i++;			//*Depuracion*
 	}
 
-	//LAST PROCESS
+	//==LAST PROCESS==//
 	if (aux)
 	{
-		printf("LAST PROCESS\n");
+		printf("CLOSE PROCESS\n");
+		//	↑ Done!				↓ Not finished...
 		((t_token *)(aux->content))->pid = fork();
+		//Check fork error!!
 		if (!((t_token *)(aux->content))->pid)
+		{
+			dup2(((t_token *)(aux->content))->fd[0], STDIN_FILENO);
+			close(((t_token *)(aux->content))->fd[1]);
+			close(((t_token *)(aux->content))->fd[0]);
 			exe_process((t_token *)(aux->content), this->env);
+		}
 		else
 			waitpid(((t_token *)(aux->content))->pid, NULL, 0);
+		//	END EXE_CLOSE_PROCESS
 	}
 }

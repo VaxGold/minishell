@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 20:23:32 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/12 17:55:06 by omercade         ###   ########.fr       */
+/*   Updated: 2022/02/14 19:29:30 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,16 @@ int	main(int narg, char **xarg, char **env)
 	while (this.exit == 0)
 	{
 		buf = readline(BLUE "minishell:/>" WHITE" ");
-		if (strlen(buf) != 0)
+		if (ft_strlen(buf) != 0)
+		{
         	add_history(buf);
+			this.tokenst = babelfish(ft_strjoin(buf, "\0"), env);		//PARSER
+			execalibur(&this);
+		}
 		else
 		{
-			this.exit = 1;	//pruebas
+			this.exit = 1;	//**SALIDA PARA PRUEBAS**//
 		}
-		this.tokenst = babelfish(ft_strjoin(buf, "\0"), env);		//PARSER
-		execalibur(&this);
 		free(buf);
 	}
 	/*FREES*/
