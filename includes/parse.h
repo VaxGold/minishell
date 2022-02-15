@@ -32,6 +32,16 @@
 /*
 ** STRUCTS & ENUMS
 */
+
+typedef	enum e_redir_type
+{
+	redir_out,
+	redir_out_append,
+	redir_in,
+	here_doc,
+	none
+}			t_redir_type;
+
 typedef struct		s_token
 {
 	char			**args;
@@ -48,6 +58,7 @@ typedef struct		s_redirect
 	char			**args;
 	char			*simbol;
 	int				pos;
+	t_redir_type	type;
 }					t_redirect;
 
 /*
