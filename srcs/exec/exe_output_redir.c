@@ -6,7 +6,7 @@
 /*   By: mangarci <mangarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 19:30:55 by mangarci          #+#    #+#             */
-/*   Updated: 2022/02/15 19:30:56 by mangarci         ###   ########.fr       */
+/*   Updated: 2022/02/15 19:54:36 by mangarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int		output_redir(t_list *out_lst)
 		close(fd);
 		fd = -1;
 		if (redir_data->type == redir_out_append)
-			fd = set_redir(redir_data->type, redir_data->simbol, STDOUT_FILENO);
+			fd = set_redir(redir_data->type, redir_data->args, STDOUT_FILENO);
 		else if (redir_data->type == redir_out)
-			fd = set_redir(redir_data->type, redir_data->simbol, STDOUT_FILENO);
+			fd = set_redir(redir_data->type, redir_data->args, STDOUT_FILENO);
 	}
 	return (fd);
 }
