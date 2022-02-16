@@ -6,7 +6,7 @@
 /*   By: adiaz-do <adiaz-do@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 20:23:32 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/16 20:24:25 by adiaz-do         ###   ########.fr       */
+/*   Updated: 2022/02/16 20:25:18 by adiaz-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ int	main(int narg, char **xarg, char **env)
 			execalibur(&this);
 		}
 		else
-			this.exit = 1;	//**SALIDA PARA PRUEBAS**//
+		{
+			this.exit = 1;	
+		}
+		//**SALIDA PARA PRUEBAS**//
 		free(buf);
 	}
 	/*FREES*/
