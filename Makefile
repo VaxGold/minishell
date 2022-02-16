@@ -48,11 +48,6 @@ ${NAME}: ${OBJS}
 	@mv libft.a ./srcs
 
 all: ${NAME}
-#############################
-
-
-####!- Aditional rules -!####
-.PHONY: fclean clean all re
 
 re: fclean all
 
@@ -68,3 +63,4 @@ fclean:
 	@${RM} minishell minishell.a ${NAME} ${OBJS}
 	@make -sC ./Libft/ fclean
 ##############################
+.PHONY: fclean clean all re
