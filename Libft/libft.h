@@ -6,7 +6,7 @@
 /*   By: adiaz-do <adiaz-do@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 14:51:42 by abello-r          #+#    #+#             */
-/*   Updated: 2022/02/11 18:07:16 by adiaz-do         ###   ########.fr       */
+/*   Updated: 2022/02/17 16:57:27 by adiaz-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ void			ft_lstclear(t_list **lst, void (*del)(void *));
 void			ft_lstiter(t_list *lst, void (*f)(void *));
 t_list			*ft_lstmap(t_list *l, void *(*f)(void *), void (*del)(void *));
 int				ft_strcmp(char *s1, char *s2);
-void			ft_putendl(char const *s);
-void			ft_putstr(char const *s);
-void			ft_putchar(char const *s);
+void			ft_putendl(char *s);
+void			ft_putstr(char *s);
+void			ft_putchar(char s);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: adiaz-do <adiaz-do@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 18:00:02 by adiaz-do          #+#    #+#             */
-/*   Updated: 2022/02/11 18:01:10 by adiaz-do         ###   ########.fr       */
+/*   Updated: 2022/02/17 16:56:04 by adiaz-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putendl(char const *s)
+void	ft_putendl(char *s)
 {
 	ft_putstr(s);
 	ft_putchar('\n');
