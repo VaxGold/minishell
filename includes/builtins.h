@@ -6,7 +6,7 @@
 /*   By: adiaz-do <adiaz-do@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 16:47:22 by adiaz-do          #+#    #+#             */
-/*   Updated: 2022/02/13 18:04:21 by adiaz-do         ###   ########.fr       */
+/*   Updated: 2022/02/17 16:44:01 by adiaz-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include "../Libft/libft.h"
 # include "./parse.h"
 # include "./minishell.h"
-# include "./exec.h"
 
 # include <readline/readline.h>
 # include <readline/history.h>
