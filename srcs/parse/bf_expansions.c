@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 17:41:07 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/18 19:28:11 by omercade         ###   ########.fr       */
+/*   Updated: 2022/02/18 20:10:14 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ int	iseov(char c)
 	if (c == 0)
 		return (1);
 	else if (c == '$')
+		return (1);
+	else if (c == 34)
+		return (1);
+	else if (c == 39)
 		return (1);
 	else if (c < 48)
 		return (0);
