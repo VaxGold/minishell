@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 17:41:07 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/18 19:25:23 by omercade         ###   ########.fr       */
+/*   Updated: 2022/02/18 19:28:11 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ char	*bf_expansions(char *str, char **env)
 	free(quotes);
 	if (start == -1)
 		return (str);
-	printf("start-->%d len-->%d\n", start, len);
 	res = exp_contructor(str, start, len, env);
 	res = bf_expansions(res, env);
 	return (res);
