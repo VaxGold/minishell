@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bf_delquotes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-do <adiaz-do@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 17:48:36 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/19 20:13:33 by adiaz-do         ###   ########.fr       */
+/*   Updated: 2022/02/19 20:46:51 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,27 @@ int		add_quoted(char	*fragment, char *ref)
 	return (len);
 }
 
-void	add_rest(int start, int pos, char *str, char *ref)
+char	*add_rest(int start, int pos, char *str, char *ref)
 {
 	char	*aux;
 	char	*added;
 
 	if  (pos - start < 1)
-		return;
-	aux = ref;
-	free(ref);
+		return ("");
+	if (ref)
+	{
+		aux = ref;
+		free(ref);
+	}
+	else
+	{
+		aux = ft_strdup("");
+	}
 	added = ft_substr(str, start, pos - start);
 	ref = ft_strjoin(aux, added);
 	free(added);
 	free(aux);
-	return ;
+	return (ref);
 }
 
 char	*bf_delquotes(char *str)
@@ -60,13 +67,15 @@ char	*bf_delquotes(char *str)
 	{
 		if (str[i] == '\"' || str[i]  == '\'')
 		{
-			add_rest(start, i, str, res);
+			res = add_rest(start, i, str, res);
 			i += add_quoted(&str[i], res);
 			start = i;
 		}
 		i++;
 	}
-	add_rest(start, i, str, res);
+	res = add_rest(start, i, str, res);
+	if (ft_strlen(res) ==  0 || (ft_strlen(res) == ft_strlen(str)))
+		return (str);
 	free(str);
 	return (res);
 }
