@@ -6,7 +6,7 @@
 /*   By: adiaz-do <adiaz-do@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 17:28:37 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/11 15:56:51 by adiaz-do         ###   ########.fr       */
+/*   Updated: 2022/02/19 19:08:21 by adiaz-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ int	n_args(char **args)
 	return (len);
 }
 
-int	ft_echo(char **args)
+int	ft_echo(char **args, char **env)
 {
+	void(*env);
 	int	i;
 	int	n_opt;
-
 	i = 1;
 	n_opt = 0;
 	if (n_args(args) > 1)

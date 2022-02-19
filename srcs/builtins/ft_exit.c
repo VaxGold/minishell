@@ -6,7 +6,7 @@
 /*   By: adiaz-do <adiaz-do@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 17:30:37 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/11 18:15:35 by adiaz-do         ###   ########.fr       */
+/*   Updated: 2022/02/19 19:17:15 by adiaz-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,22 @@ int ft_array_len(char **cmd)
     return (i);
 }
 
-int ft_exit(char **cmd)
+int ft_exit(char **args, char **env)
 {
     int num;
 
+    void(*env);
     num = 0;
-    if  (!cmd)
+    if  (!args)
         return(!(printf("exit\n")));
-    if  (ft_array_len(cmd) == 1)
+    if  (ft_array_len(args) == 1)
     {
-        while (ft_isdigit(cmd[0][num]))
+        while (ft_isdigit(args[0][num]))
             num++;
         if (num == 0)
-            return(!(!printf("minishell: exit: %s: numeric argument required\n", cmd[0])));
+            return(!(!printf("minishell: exit: %s: numeric argument required\n", args[0])));
         else if (num > 0)
-            return(ft_atoi(cmd[0]));
+            return(ft_atoi(args[0]));
     }
     else
         return(!(!printf("minishell: exit: too many arguments\n")));

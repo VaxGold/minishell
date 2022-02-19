@@ -6,20 +6,19 @@
 /*   By: adiaz-do <adiaz-do@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 17:29:59 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/11 18:10:20 by adiaz-do         ###   ########.fr       */
+/*   Updated: 2022/02/19 19:05:19 by adiaz-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/builtins.h"
 
-int	ft_env(t_build *env)
+int	ft_env(char **args, char **env)
 {
-	while (env && env->next != NULL)
-	{
-		ft_putendl(env->value);
-		env = env->next;
-	}
-	if (env)
-		ft_putendl(env->value);
+	int	i;
+	void(*args);
+	
+	i = 0;
+	while (env[i])
+		printf("%s\n", env[i++]);
 	return (0);
 }

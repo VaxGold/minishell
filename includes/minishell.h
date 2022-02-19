@@ -61,8 +61,7 @@
 typedef	struct		s_ms
 {
 	int				exit;
-	int				in;
-	int				out;
+	int				switch_signal;
 	char			**env;
 	char			**secret;
 	t_list			*tokenst;
@@ -72,7 +71,6 @@ typedef	struct		s_ms
 ** FUNCTIONS
 */
 void	header(void);
-int		ft_exit(char **cmd);
 
 void	execalibur(t_ms *this);
 void	exe_process(t_token *token, char **env);

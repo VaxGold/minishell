@@ -1,25 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adiaz-do <adiaz-do@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/06 17:30:43 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/19 19:13:31 by adiaz-do         ###   ########.fr       */
+/*   Created: 2022/02/18 19:08:44 by adiaz-do          #+#    #+#             */
+/*   Updated: 2022/02/18 19:08:53 by adiaz-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/builtins.h"
 
-int	ft_get_pwd(char **arg, char **env)
+static void	swap(char **a, char **b)
 {
-	char	c[PATH_MAX];
+	char	*tmp;
 
-	(void)arg;
-	(void)env;
-	if (getcwd(c, sizeof(c)) == NULL)
-		return (1);
-	printf("%s\n", c);
-	return (0);
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
+void	ft_sort_tab(char **arr)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	while (arr[i])
+	{
+		j = i + 1;
+		while (arr[j])
+		{
+			if (ft_strcmp(arr[i], arr[j]) > 0)
+				swap(&arr[i], &arr[j]);
+			++j;
+		}
+		++i;
+	}
 }

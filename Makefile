@@ -3,7 +3,7 @@ NAME= minishell.a
 # Agrega aquí los Sources #
 BUILTINS = 
 
-EXEC = execalibur exe_process
+EXEC = execalibur exe_process exe_menu exe_opt 
 
 MAIN = header minishell
 
