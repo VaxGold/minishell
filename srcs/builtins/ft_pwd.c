@@ -6,7 +6,7 @@
 /*   By: adiaz-do <adiaz-do@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 17:30:43 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/19 19:13:31 by adiaz-do         ###   ########.fr       */
+/*   Updated: 2022/02/19 20:08:32 by adiaz-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int	ft_get_pwd(char **arg, char **env)
 {
 	char	c[PATH_MAX];
 
-	(void)arg;
-	(void)env;
+	*arg = 0;
+	*env = 0;
 	if (getcwd(c, sizeof(c)) == NULL)
 		return (1);
 	printf("%s\n", c);

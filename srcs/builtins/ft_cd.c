@@ -3,37 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adiaz-do <adiaz-do@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 17:29:46 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/19 19:36:36 by omercade         ###   ########.fr       */
+/*   Updated: 2022/02/19 20:12:17 by adiaz-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/builtins.h"
 
-// char	*ms_get_env(char **env, char *arg)
-// {
-// 	int		i;
-// 	char	**split;
+ char	*ms_get_env(char **env, char *arg)
+  {
+	  	int		i;
+  	char	**split;
 
-// 	i = 0;
-// 	while (env[i])
-// 	{
-// 		split = ft_split(env[i], '=');
-// 		if (ft_strcmp(split[0], arg) == 0)
-// 		{
-// 			ft_free_tab(split);
-// 			break ;
-// 		}
-// 		else
-// 			i++;
-// 		ft_free_tab(split);
-// 	}
-// 	if (env[i] == NULL)
-// 		return (NULL);
-// 	return (env[i]);
-// }
+ 	i = 0;
+ 	while (env[i])
+ 	{
+ 		split = ft_split(env[i], '=');
+ 		if (ft_strcmp(split[0], arg) == 0)
+ 		{
+ 			ft_free_tab(split);
+ 			break ;
+ 		}
+ 		else
+ 			i++;
+ 		ft_free_tab(split);
+ 	}
+ 	if (env[i] == NULL)
+ 		return (NULL);
+ 	return (env[i]);
+ }
 
 // void	set_pwd(char **arg, char **env)
 // {

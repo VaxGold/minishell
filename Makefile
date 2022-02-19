@@ -7,7 +7,7 @@ EXEC = execalibur exe_process exe_menu exe_opt
 
 MAIN = header minishell
 
-PARSE = babelfish bf_expansions bf_split bf_tokenizer bf_escapes
+PARSE = babelfish bf_expansions bf_split bf_tokenizer bf_escapes bf_delquotes
 
 TOOLS = secure_free free_strarr
 

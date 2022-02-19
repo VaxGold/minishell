@@ -6,7 +6,7 @@
 /*   By: adiaz-do <adiaz-do@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 17:30:37 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/19 19:17:15 by adiaz-do         ###   ########.fr       */
+/*   Updated: 2022/02/19 20:07:58 by adiaz-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int ft_exit(char **args, char **env)
 {
     int num;
 
-    void(*env);
+    *env = 0;
     num = 0;
     if  (!args)
         return(!(printf("exit\n")));

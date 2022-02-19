@@ -6,7 +6,7 @@
 /*   By: adiaz-do <adiaz-do@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 17:29:59 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/19 19:05:19 by adiaz-do         ###   ########.fr       */
+/*   Updated: 2022/02/19 20:07:51 by adiaz-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_env(char **args, char **env)
 {
 	int	i;
-	void(*args);
+	*args = 0;
 	
 	i = 0;
 	while (env[i])
