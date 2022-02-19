@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-do <adiaz-do@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 16:47:22 by adiaz-do          #+#    #+#             */
-/*   Updated: 2022/02/19 19:16:30 by adiaz-do         ###   ########.fr       */
+/*   Updated: 2022/02/19 19:28:27 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	**ms_matrix_remove_line(char **matrix, char *line);
 int		ft_cd(char **arg, char **env);
 int		ft_echo(char **args, char **env);
 int		ft_env(char **args, char **env);
-int 	ft_exit(char **args, char **env)
+int 	ft_exit(char **args, char **env);
 int		ft_export(char **arg ,char **env);
 int		ft_get_pwd(char **arg, char **env);
 int		ft_unset(char **env, char **arg);
