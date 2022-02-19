@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bf_expansions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adiaz-do <adiaz-do@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 17:41:07 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/09 17:24:07 by omercade         ###   ########.fr       */
+/*   Updated: 2022/02/19 19:21:07 by adiaz-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 int	iseov(char c)
 {
 	if (c == 0)
+		return (1);
+	else if (c == '$')
+		return (1);
+	else if (c == 34)
+		return (1);
+	else if (c == 39)
 		return (1);
 	else if (c < 48)
 		return (0);
@@ -39,8 +45,7 @@ char	*exp_variable(char *expand, char **env)
 	while (env[i])
 	{
 		if (ft_strncmp(temp, env[i], ft_strlen(temp)) == 0)
-			mod = ft_strdup(ft_substr(env[i],
-						ft_strlen(temp), ft_strlen(env[i]) - ft_strlen(temp)));
+			mod = ft_substr(env[i], ft_strlen(temp), ft_strlen(env[i]) - ft_strlen(temp));
 		i++;
 	}
 	free(expand);
@@ -67,6 +72,20 @@ char	*exp_contructor(char *str, int start, int len, char **env)
 	return (res);
 }
 
+int		exp_length(char *str)
+{
+	int len;
+
+	len = 1;
+	while (str[len])
+	{
+		if (iseov(str[len]))
+			return (len);
+		len++;
+	}
+	return (len);
+}
+
 char	*bf_expansions(char *str, char **env)
 {
 	int	*quotes;
@@ -81,20 +100,18 @@ char	*bf_expansions(char *str, char **env)
 	len = 0;
 	while (str[i])
 	{
-		if ((iseov(str[i]) || str[i + 1] == 0) && start != -1)
+		if (str[i] == '$' && quotes[i] < 2)
 		{
-			len = i - start + 1;
-			break ;
-		}
-		else if (str[i] == '$' && quotes[i] < 2)
 			start = i;
+			len = exp_length(&str[i]);
+			break;
+		}
 		i++;
 	}
 	free(quotes);
 	if (start == -1)
 		return (str);
-	res = exp_contructor(str, start, len, env);			//Sustitucion de la variable de entorno
+	res = exp_contructor(str, start, len, env);
 	res = bf_expansions(res, env);
 	return (res);
-	//return (bf_expansions(res, env));				//Recursivo desactivado
 }
