@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 18:08:18 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/07 19:17:16 by omercade         ###   ########.fr       */
+/*   Updated: 2022/02/19 19:13:34 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	add_argument(char *line, t_list **argst, char **env)
 	if (ft_strlen(line) < 1)
 		return ;
 	line = bf_expansions(line, env);							//EXPANSIONS!!
-	ft_lstadd_back(argst, ft_lstnew((void *)line));
+	ft_lstadd_back(argst, ft_lstnew((void *)bf_delquotes(line)));	//Quotes delete
 	return ;
 }
 

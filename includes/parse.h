@@ -47,7 +47,6 @@ typedef struct		s_token
 	char			**args;
 	t_list			*in;
 	t_list			*out;
-	//PIPES & FDs
 	pid_t			pid;
 	int				fd[2];
 	int				status;		//ERR_Control
@@ -57,7 +56,6 @@ typedef struct		s_redirect
 {
 	char			**args;
 	char			*simbol;
-	int				pos;
 	t_redir_type	type;
 }					t_redirect;
 
@@ -69,5 +67,6 @@ t_list	*bf_tokenizer(char *buf, char **env);
 void	bf_split(char *line, t_token *token, t_list **largs, char **env);
 int		*bf_escapes(char *str);
 char	*bf_expansions(char *str, char **env);
+char	*bf_delquotes(char *str);
 
 #endif
