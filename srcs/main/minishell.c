@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 20:23:32 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/17 21:18:51 by omercade         ###   ########.fr       */
+/*   Updated: 2022/02/19 19:30:51 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ int	main(int narg, char **xarg, char **env)
 	/*INITIALIZE*/
 	//g_exit_status = 0;
 	this.exit = 0;
-	this.in = dup(STDIN);
-	this.out = dup(STDOUT);
 	this.env = env;
 	//signal(SIGINT, signal_handler);
 	//signal(SIGQUIT, SIG_IGN);

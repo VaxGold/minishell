@@ -1,7 +1,7 @@
 NAME= minishell.a
 
 # Agrega aquí los Sources #
-BUILTINS = 
+BUILTINS = ft_cd ft_echo ft_env ft_exit ft_export ft_pwd ft_unset utils utils2
 
 EXEC = execalibur exe_process exe_menu exe_opt 
 

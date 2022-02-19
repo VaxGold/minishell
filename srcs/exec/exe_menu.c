@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe_menu.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-do <adiaz-do@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 17:58:19 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/19 19:16:53 by adiaz-do         ###   ########.fr       */
+/*   Updated: 2022/02/19 19:30:39 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*exe_menu(void)
 {
-	void	(**menu)(t_ms *);
+	int	(**menu)(char **, char **);
 
 	menu = malloc(sizeof(*menu) * 8);
 	menu[0] = &ft_cd;

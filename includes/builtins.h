@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 16:47:22 by adiaz-do          #+#    #+#             */
-/*   Updated: 2022/02/19 19:28:27 by omercade         ###   ########.fr       */
+/*   Updated: 2022/02/19 19:34:07 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ms_get_env(char **env, char *arg);
 void	ft_free_tab(char **tab);
 void	ft_sort_tab(char **arr);
 char	*ft_strjoin_free_s1(char *s1, char const *s2);
-void	set_pwd(char *arg, char	*c);
+void	set_pwd(char **arg, char	**env);
 char	**ms_matrix_add_line(char **matrix, char *new_line);
 char	**ms_matrix_remove_line(char **matrix, char *line);
 
