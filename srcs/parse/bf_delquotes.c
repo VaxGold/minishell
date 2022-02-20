@@ -6,53 +6,49 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 17:48:36 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/19 20:46:51 by omercade         ###   ########.fr       */
+/*   Updated: 2022/02/20 18:35:03 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parse.h"
 
-int		add_quoted(char	*fragment, char *ref)
+int		hasquotes(char *str)
 {
-	char	*aux;
-	char	*added;
-	char	simbol;
-	int		len;
+	int i;
 
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\'' || str[i] == '\"')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	quotes_len(char	*fragment, int *index)
+{
+	int		len;
+	char	simbol;
+	
 	simbol = fragment[0];
 	len = 1;
 	while (fragment[len] != simbol)
 		len++;
-	aux = ref;
-	free(ref);
-	added = ft_substr(fragment, 1, len - 2);
-	ref = ft_strjoin(aux, added);
-	free(aux);
-	free(added);
-	return (len);
+	*index += len;
+	return (len - 1);
 }
 
-char	*add_rest(int start, int pos, char *str, char *ref)
+char	*add_str(char *origin, char *temp)
 {
-	char	*aux;
-	char	*added;
+	char	*res;
 
-	if  (pos - start < 1)
-		return ("");
-	if (ref)
-	{
-		aux = ref;
-		free(ref);
-	}
-	else
-	{
-		aux = ft_strdup("");
-	}
-	added = ft_substr(str, start, pos - start);
-	ref = ft_strjoin(aux, added);
-	free(added);
-	free(aux);
-	return (ref);
+	res = ft_strjoin(origin, temp);
+	printf("add str\n");
+	free(origin);
+	free(temp);
+	printf("str added!\n");
+	return (res);
 }
 
 char	*bf_delquotes(char *str)
@@ -61,21 +57,23 @@ char	*bf_delquotes(char *str)
 	int		start;
 	char	*res;
 
+	if (!hasquotes(str))
+		return (str);
 	i = 0;
 	start = 0;
+	res = ft_strdup("");
 	while (str[i])
 	{
 		if (str[i] == '\"' || str[i]  == '\'')
 		{
-			res = add_rest(start, i, str, res);
-			i += add_quoted(&str[i], res);
-			start = i;
+			res = add_str(res, ft_substr(str, start, i - start));
+			start = i + 1;
+			res = add_str(res, ft_substr(str, start, quotes_len(&str[i], &i)));
+			start = ++i;
 		}
 		i++;
 	}
-	res = add_rest(start, i, str, res);
-	if (ft_strlen(res) ==  0 || (ft_strlen(res) == ft_strlen(str)))
-		return (str);
+	res = add_str(res, ft_substr(str, start, i - start));
 	free(str);
 	return (res);
 }

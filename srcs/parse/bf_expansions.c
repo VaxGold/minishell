@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bf_expansions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-do <adiaz-do@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 17:41:07 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/19 19:21:07 by adiaz-do         ###   ########.fr       */
+/*   Updated: 2022/02/20 18:45:44 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	iseov(char c)
 	if (c == 0)
 		return (1);
 	else if (c == '$')
+		return (1);
+	else if (c == ' ')
 		return (1);
 	else if (c == 34)
 		return (1);
