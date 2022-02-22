@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 17:48:36 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/20 18:35:03 by omercade         ###   ########.fr       */
+/*   Updated: 2022/02/20 19:48:04 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,8 @@ char	*add_str(char *origin, char *temp)
 	char	*res;
 
 	res = ft_strjoin(origin, temp);
-	printf("add str\n");
 	free(origin);
 	free(temp);
-	printf("str added!\n");
 	return (res);
 }
 

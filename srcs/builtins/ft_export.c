@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-do <adiaz-do@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 17:30:10 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/19 20:11:28 by adiaz-do         ###   ########.fr       */
+/*   Updated: 2022/02/22 18:49:15 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/builtins.h"
+// #include "../../includes/builtins.h"
+#include "../../includes/minishell.h"
 
 //nt	ms_check_export_arg(char *arg)
 //
@@ -116,8 +117,10 @@
 //	return (ret);
 //
 //
-int	ft_export(char **arg, char **env)
+
+
+int	ft_export(t_ms *data)
 {
-	printf("Soy ft_export con %s y %s\n", arg[0], env[0]);
+	printf("Soy ft_export en el token: %s.\n", ((t_token *)(data->tokenst->content))->args[0]);
 	return (0);
 }

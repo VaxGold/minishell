@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-do <adiaz-do@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:51:38 by adiaz-do          #+#    #+#             */
-/*   Updated: 2022/02/19 20:09:10 by adiaz-do         ###   ########.fr       */
+/*   Updated: 2022/02/22 18:44:08 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/builtins.h"
+#include "../../includes/minishell.h"
 
 char	**ms_matrix_add_line(char **matrix, char *new_line)
 {

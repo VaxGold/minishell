@@ -15,6 +15,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
+# include <fcntl.h>
 # include <limits.h>
 # include <string.h>
 # include <sys/types.h>
@@ -67,15 +68,32 @@ typedef	struct		s_ms
 	t_list			*tokenst;
 }					t_ms;
 
+typedef	struct		s_exefiles
+{
+	int				fd_infile;
+	int				fd_outfile;
+}					t_exefiles;
+
 /*
 ** FUNCTIONS
 */
 void	header(void);
 
-void	execalibur(t_ms *this);
-void	exe_process(t_token *token, char **env);
+void		execalibur(t_ms *this);
+void		exe_process(t_token *token, char **env);
+t_exefiles	exe_redirect(t_list *lst_in, t_list *lst_out);
+void		*exe_menu(void);
+int			exe_opt(char *cmd);
 
-void	secure_free(char *str);
-void	free_strarr(char **array);
+int		ft_cd(t_ms *data);
+int		ft_echo(t_ms *data);
+int		ft_env(t_ms *data);
+int 	ft_exit(t_ms *data);
+int		ft_export(t_ms *data);
+int		ft_pwd(t_ms *data);
+int		ft_unset(t_ms *data);
+
+void		secure_free(char *str);
+void		free_strarr(char **array);
 
 #endif

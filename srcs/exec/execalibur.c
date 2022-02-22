@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 18:07:23 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/20 18:20:03 by omercade         ###   ########.fr       */
+/*   Updated: 2022/02/22 19:06:04 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,57 +96,62 @@ void	open_process(t_list *token, char **env, t_list *tokenst)
 		multi_process(token->next, env, tokenst);
 }
 
-void	execalibur(t_ms *this)
-{
-	t_list	*aux;
-
-
-	aux = this->tokenst;
-	if (aux->next)
-		open_process(aux, this->env, this->tokenst);
-	else
-	{
-		((t_token *)(aux->content))->pid = fork();
-		if (!((t_token *)(aux->content))->pid)
-			exe_process((t_token *)(aux->content), this->env);
-		else
-			waitpid(((t_token *)(aux->content))->pid, NULL, 0);
-	}
-}
-
-
-//*********		ON WORKING...	*********//
-
 // void	execalibur(t_ms *this)
 // {
 // 	t_list	*aux;
-// 	int		opt;
-// 	void	(**menu)(char **, char **);
 
-// 	// menu = exe_menu();
 // 	aux = this->tokenst;
 // 	if (aux->next)
 // 		open_process(aux, this->env, this->tokenst);
 // 	else
 // 	{
-// 		// opt = exe_opt(((t_token *)(aux->content))->args[0]);
-// 		if(opt > 0)
-// 		{
-// 			// file_redir(((t_token *)(aux->content))->in, STDIN_FILENO, 0);
-// 			// file_redir(((t_token *)(aux->content))->out, STDOUT_FILENO, 1);
-// 			menu[opt](((t_token *)(aux->content))->args, this->env);
-// 		}
+// 		((t_token *)(aux->content))->pid = fork();
+// 		if (!((t_token *)(aux->content))->pid)
+// 			exe_process((t_token *)(aux->content), this->env);
 // 		else
-// 		{
-// 			((t_token *)(aux->content))->pid = fork();
-// 			if (!((t_token *)(aux->content))->pid)
-// 			{
-// 				// file_redir(((t_token *)(aux->content))->in, STDIN_FILENO, 0);
-// 				// file_redir(((t_token *)(aux->content))->out, STDOUT_FILENO, 1);
-// 				exe_process((t_token *)(aux->content), this->env);
-// 			}
-// 			else
-// 				waitpid(((t_token *)(aux->content))->pid, NULL, 0);
-// 		}
+// 			waitpid(((t_token *)(aux->content))->pid, NULL, 0);
 // 	}
 // }
+
+
+//*********		ON WORKING...	*********//
+
+void	execalibur(t_ms *this)
+{
+	t_list		*aux;
+	int			opt;
+	t_exefiles	files;
+	int			(**menu)(t_ms *);
+
+	menu = exe_menu();
+	aux = this->tokenst;
+	exe_redirect(((t_token *)(aux->content))->in, ((t_token *)(aux->content))->out);
+	if (aux->next)
+		open_process(aux, this->env, this->tokenst);
+	else
+	{
+		opt = exe_opt(((t_token *)(aux->content))->args[0]);
+		if(opt < 7)
+			menu[opt](this);
+		else
+		{
+			((t_token *)(aux->content))->pid = fork();
+			if (!((t_token *)(aux->content))->pid)
+			{
+				if (files.fd_infile != -2)
+				{
+					dup2(files.fd_infile, STDIN_FILENO);
+					close(files.fd_infile);
+				}
+				if (files.fd_outfile != -2)
+				{
+					dup2(files.fd_outfile, STDOUT_FILENO);
+					close(files.fd_outfile);
+				}
+				exe_process((t_token *)(aux->content), this->env);
+			}
+			else
+				waitpid(((t_token *)(aux->content))->pid, NULL, 0);
+		}
+	}
+}
