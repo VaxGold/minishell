@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 18:07:23 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/22 19:06:04 by omercade         ###   ########.fr       */
+/*   Updated: 2022/02/22 21:12:55 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,33 +120,40 @@ void	execalibur(t_ms *this)
 {
 	t_list		*aux;
 	int			opt;
-	t_exefiles	files;
 	int			(**menu)(t_ms *);
+	int			fd_file;
 
 	menu = exe_menu();
 	aux = this->tokenst;
-	exe_redirect(((t_token *)(aux->content))->in, ((t_token *)(aux->content))->out);
 	if (aux->next)
 		open_process(aux, this->env, this->tokenst);
 	else
 	{
 		opt = exe_opt(((t_token *)(aux->content))->args[0]);
-		if(opt < 7)
+		if(opt != -1)
+		{
+			if (((t_token *)(aux->content))->in)
+				exe_redirect(((t_token *)(aux->content))->in, this->fd_in);
+			if (((t_token *)(aux->content))->out)
+				this->fd_out = exe_redirect(((t_token *)(aux->content))->out, this->fd_out);
 			menu[opt](this);
+		}
 		else
 		{
 			((t_token *)(aux->content))->pid = fork();
 			if (!((t_token *)(aux->content))->pid)
 			{
-				if (files.fd_infile != -2)
+				if (((t_token *)(aux->content))->in)
 				{
-					dup2(files.fd_infile, STDIN_FILENO);
-					close(files.fd_infile);
+					fd_file = exe_redirect(((t_token *)(aux->content))->in, this->fd_in);
+					dup2(fd_file, STDIN_FILENO);
+					close(fd_file);
 				}
-				if (files.fd_outfile != -2)
+				if (((t_token *)(aux->content))->out)
 				{
-					dup2(files.fd_outfile, STDOUT_FILENO);
-					close(files.fd_outfile);
+					fd_file = exe_redirect(((t_token *)(aux->content))->out, this->fd_out);
+					dup2(fd_file, STDOUT_FILENO);
+					close(fd_file);
 				}
 				exe_process((t_token *)(aux->content), this->env);
 			}

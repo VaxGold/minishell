@@ -65,25 +65,21 @@ typedef	struct		s_ms
 	int				switch_signal;
 	char			**env;
 	char			**secret;
+	int				fd_in;
+	int				fd_out;
 	t_list			*tokenst;
-}					t_ms;
-
-typedef	struct		s_exefiles
-{
-	int				fd_infile;
-	int				fd_outfile;
-}					t_exefiles;
+}					t_ms; 
 
 /*
 ** FUNCTIONS
 */
 void	header(void);
 
-void		execalibur(t_ms *this);
-void		exe_process(t_token *token, char **env);
-t_exefiles	exe_redirect(t_list *lst_in, t_list *lst_out);
-void		*exe_menu(void);
-int			exe_opt(char *cmd);
+void	execalibur(t_ms *this);
+void	exe_process(t_token *token, char **env);
+int		exe_redirect(t_list *lst, int origin);
+void	*exe_menu(void);
+int		exe_opt(char *cmd);
 
 int		ft_cd(t_ms *data);
 int		ft_echo(t_ms *data);
@@ -93,7 +89,7 @@ int		ft_export(t_ms *data);
 int		ft_pwd(t_ms *data);
 int		ft_unset(t_ms *data);
 
-void		secure_free(char *str);
-void		free_strarr(char **array);
+void	secure_free(char *str);
+void	free_strarr(char **array);
 
 #endif
