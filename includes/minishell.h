@@ -68,6 +68,7 @@ typedef	struct		s_ms
 	int				fd_in;
 	int				fd_out;
 	t_list			*tokenst;
+	t_list			*actual_token;
 }					t_ms; 
 
 /*

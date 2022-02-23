@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 17:32:34 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/22 21:12:52 by omercade         ###   ########.fr       */
+/*   Updated: 2022/02/23 19:20:27 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,11 @@ int	exe_redirect(t_list *lst, int origin)
 		temp = *((t_redirect *)(aux->content));
 		if (!ft_strcmp(temp.simbol, ">\0"))			//Comprobar que no sea directorio
 			fd = open(temp.args[0], O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, S_IRWXU);
-		else if (ft_strcmp(temp.simbol, ">>\0"))
+		else if (!ft_strcmp(temp.simbol, ">>\0"))
 			fd = open(temp.args[0], O_WRONLY | O_CREAT | O_APPEND, S_IRWXU);
-		else if (ft_strcmp(temp.simbol, "<\0"))
+		else if (!ft_strcmp(temp.simbol, "<\0"))
 			fd = open(temp.args[0], O_RDONLY);
-		else if (ft_strcmp(temp.simbol, "<<\0"))
+		else if (!ft_strcmp(temp.simbol, "<<\0"))
 			fd = open(temp.args[0], O_RDONLY);			//Heredoc BONUS!!
 		aux = aux->next;
 		if (aux)
