@@ -6,63 +6,93 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 19:30:19 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/23 21:17:36 by omercade         ###   ########.fr       */
+/*   Updated: 2022/02/26 19:48:40 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	exe_closeprocess(t_ms *data)
+static void	wait_for_all(t_ms *data)
+{
+	data->actual_token = data->tokenst;
+	while (data->actual_token)
+	{
+		waitpid(((t_token *)(data->actual_token->content))->pid, NULL, 0);
+		data->actual_token = data->actual_token->next;
+	}
+}
+
+static void	close_fd(t_ms *data)
 {
 	t_token	*actual_t;
-	t_list	*aux;
-	int		opt;
-	int		fd_file;
-	int		(**menu)(t_ms *);
 
-	menu = exe_menu();
 	actual_t = (t_token *)(data->actual_token->content);
-	opt = exe_opt(actual_t->args[0]);
-	if (opt != -1)
+	//siganls
+	close(actual_t->fd[1]);
+	close(actual_t->fd[0]);
+}
+
+static void	in_redirect(t_ms *data)
+{
+	int	fd;
+	t_token	*actual_t;
+
+	actual_t = (t_token *)(data->actual_token->content);
+	fd = exe_redirect(actual_t->in, STDIN_FILENO);
+	if (fd == -1)
+		exit(-1);
+	else if (fd > 2)
 	{
-		if (actual_t->in)
-			exe_redirect(actual_t->in, data->fd_in);
-		if (actual_t->out)
-			data->fd_out = exe_redirect(actual_t->out, data->fd_out);
-		menu[opt](data);
+		dup2(fd, STDIN_FILENO);
+		close(fd);
 	}
 	else
 	{
-		actual_t->pid = fork();
-		if (actual_t->pid)
-		{
-			dup2(actual_t->fd[0], STDIN_FILENO);
-			close(actual_t->fd[0]);
-			close(actual_t->fd[1]);
-			if (actual_t->in)
-			{
-				fd_file = exe_redirect(actual_t->in, data->fd_in);
-				dup2(fd_file, STDIN_FILENO);
-				close(fd_file);
-			}
-			if (actual_t->out)
-			{
-				fd_file = exe_redirect(actual_t->out, data->fd_out);
-				dup2(fd_file, STDOUT_FILENO);
-				close(fd_file);
-			}
-			exe_process(actual_t, data->env);
-		}
-		else
-		{
-			close(actual_t->fd[0]);
-			close(actual_t->fd[1]);
-		}
-		aux = data->tokenst;
-		while (aux)
-		{
-			waitpid(((t_token *)(aux->content))->pid, NULL, 0);
-			aux = aux->next;
-		}
+		dup2(actual_t->fd[0], STDIN_FILENO);
+		close(actual_t->fd[0]);
 	}
+}
+
+static void	out_redirect(t_ms *data)
+{
+	int	fd;
+	t_token	*actual_t;
+
+	actual_t = (t_token *)(data->actual_token->content);
+	//fd = exe_redirect(((t_token *)(data->actual_token->content))->out, STDOUT_FILENO);
+	fd = actual_t->fd_out;
+	if (fd == -1)
+		exit(-1);
+	else if (fd > 2)
+	{
+		close(actual_t->fd[1]);
+		dup2(fd, STDOUT_FILENO);
+		close(fd);
+	}
+	else
+		close(actual_t->fd[1]);
+}
+
+void	exe_closeprocess(t_ms *data)
+{
+	t_token	*actual_t;
+
+	actual_t = (t_token *)(data->actual_token->content);
+	actual_t->pid = fork();
+	if (actual_t->pid == 0)
+	{
+		actual_t->fd_out = exe_redirect(actual_t->out, STDOUT_FILENO);
+		in_redirect(data);
+		out_redirect(data);
+		if (actual_t->fd_out != -2 && exe_builtin(data) == -1)
+		{
+			if (actual_t->args)
+				exe_process(actual_t, data->env);
+			//signals
+		}
+		exit(0);
+	}
+	else
+		close_fd(data);
+	wait_for_all(data);
 }

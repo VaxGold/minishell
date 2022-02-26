@@ -77,10 +77,15 @@ typedef	struct		s_ms
 void	header(void);
 
 void	execalibur(t_ms *this);
+void	exe_uniprocess(t_ms *data);
+void	exe_openprocess(t_ms *data);
+void	exe_multiprocess(t_ms *data);
+void	exe_closeprocess(t_ms *data);
 void	exe_process(t_token *token, char **env);
 int		exe_redirect(t_list *lst, int origin);
-void	*exe_menu(void);
-int		exe_opt(char *cmd);
+int		exe_builtin(t_ms *data);
+// void	*exe_menu(void);
+// int		exe_opt(char *cmd);
 
 int		ft_cd(t_ms *data);
 int		ft_echo(t_ms *data);
