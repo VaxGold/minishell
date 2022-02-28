@@ -9,7 +9,7 @@ MAIN = header minishell
 
 PARSE = babelfish bf_expansions bf_split bf_tokenizer bf_escapes bf_delquotes
 
-TOOLS = secure_free free_strarr display_array display_lst display_tokens
+TOOLS = secure_free free_strarr add_strarr rm_strarr display_array display_lst display_tokens
 
 SRCS=	$(addsuffix .c, $(addprefix srcs/builtins/, $(BUILTINS))) \
 		$(addsuffix .c, $(addprefix srcs/exec/, $(EXEC))) \

@@ -19,7 +19,11 @@ int	ft_env(t_ms *data)
 
 	i = 0;
 	while (data->env[i])
-		printf("%s\n", data->env[i++]);
+	{
+		if (strchr(data->env[i], '=') != NULL)
+			printf("%s\n", data->env[i]);
+		i++;
+	}
 	return (0);
 }
 /*

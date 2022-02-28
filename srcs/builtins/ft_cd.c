@@ -24,24 +24,25 @@ char	*ms_get_env(char **env, char *arg)
 		split = ft_split(env[i], '=');
 		if (ft_strcmp(split[0], arg) == 0)
 		{
-			ft_free_tab(split);
+			free_strarr(split);
 			break ;
 		}
 		else
 			i++;
-		ft_free_tab(split);
+		free_strarr(split);
 	}
 	if (env[i] == NULL)
 		return (NULL);
 	return (env[i]);
 }
-/*
-void	set_pwd(char *arg, char *env)
+
+void	set_pwd(char *arg, char *path)
 {
 	char	*string;
 
-	string = ft_strjoin(arg, env);
-	ms_set_env(env, string);
+	string = ft_strjoin(arg, path);
+	printf("%s\n", string);
+	//ms_set_env(env, string);
 	free (string);
 }
 
@@ -49,36 +50,32 @@ int	ft_cd(t_ms *data)
 {
 	char	c[PATH_MAX];
 	char	**arg;
-	char	**env;
+	char	*path;
 
+	(void)data;
 	arg = ((t_token *)(data->tokenst->content))->args;
-	if (arg == NULL)
+	/*if (arg == NULL)
 	{
-		arg = ms_get_env(data->env, "HOME") + 5;
-		if ((arg - 5) == NULL)
+		home_path = ms_get_env(data->env, "HOME") + 5;
+		if ((home_path - 5) == NULL)
 		{
 			printf("cd: HOME not set\n");
 			return (1);
 		}
-	}
+	}*/
+	path = arg[1];
 	getcwd(c, sizeof(c));
-	if (chdir(arg) == -1)
+	if (chdir(path) == -1)
 	{
-		if (arg[0] == '\0')
+		if (path == NULL)
 			return (1);
 		ft_putstr_fd("cd: ", 2);
-		ft_putstr_fd(arg, 2);
+		ft_putstr_fd(path, 2);
 		ft_putendl_fd(": No such file or directory", 2);
 		return (1);
 	}
-	set_pwd("OLDPWD=", data->env);
+	set_pwd("OLDPWD=", c);
 	getcwd(c, sizeof(c));
 	set_pwd("PWD=", c);
-	return (0);
-}*/
-
-int	ft_cd(t_ms *data)
-{
-	printf("Soy ft_cd en el token: %s.\n", ((t_token *)(data->tokenst->content))->args[0]);
 	return (0);
 }

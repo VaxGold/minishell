@@ -27,6 +27,5 @@ int	ft_get_pwd(t_ms *data)
 int	ft_pwd(t_ms *data)
 {
 	ft_get_pwd(data);
-	printf("Soy ft_pwd en el token: %s.\n", ((t_token *)(data->tokenst->content))->args[0]);
 	return (0);
 }

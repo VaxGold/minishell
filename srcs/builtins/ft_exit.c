@@ -32,7 +32,7 @@ int	ft_exit(t_ms *data)
 	args = ((t_token *)(data->tokenst->content))->args;
 	if (ft_array_len(args) == 1)
 		{
-			printf("exit");
+			printf("exit\n");
 			exit(0);
 		}
 //	else if (ft_array_len(args) == 2)
@@ -51,9 +51,3 @@ int	ft_exit(t_ms *data)
 		printf("minishell: exit: too many arguments\n");
 	return (0);
 }
-/*
-int	ft_exit(t_ms *data)
-{
-	printf("Soy ft_exit en el token: %s.\n", ((t_token *)(data->tokenst->content))->args[0]);
-	return (0);
-}*/
