@@ -68,6 +68,7 @@ typedef	struct		s_ms
 	int				fd_in;
 	int				fd_out;
 	t_list			*tokenst;
+	t_list			*actual_token;
 }					t_ms; 
 
 /*
@@ -76,10 +77,12 @@ typedef	struct		s_ms
 void	header(void);
 
 void	execalibur(t_ms *this);
+void	exe_openprocess(t_ms *data);
+void	exe_multiprocess(t_ms *data);
+void	exe_closeprocess(t_ms *data);
 void	exe_process(t_token *token, char **env);
 int		exe_redirect(t_list *lst, int origin);
-void	*exe_menu(void);
-int		exe_opt(char *cmd);
+int		exe_builtin(t_ms *data);
 
 int		ft_cd(t_ms *data);
 int		ft_echo(t_ms *data);
@@ -91,5 +94,8 @@ int		ft_unset(t_ms *data);
 
 void	secure_free(char *str);
 void	free_strarr(char **array);
+void	display_array(char **arr, char *str);
+void	display_lst(t_list *lst, char *str);
+void	display_tokens(t_list *token);
 
 #endif

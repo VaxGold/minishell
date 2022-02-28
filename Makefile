@@ -3,13 +3,13 @@ NAME= minishell.a
 # Agrega aquí los Sources #
 BUILTINS = ft_cd ft_echo ft_env ft_exit ft_export ft_pwd ft_unset
 
-EXEC = execalibur exe_process exe_menu exe_opt exe_redirect
+EXEC = execalibur exe_process exe_builtin exe_redirect exe_closeprocess exe_openprocess exe_multiprocess
 
 MAIN = header minishell
 
 PARSE = babelfish bf_expansions bf_split bf_tokenizer bf_escapes bf_delquotes
 
-TOOLS = secure_free free_strarr
+TOOLS = secure_free free_strarr display_array display_lst display_tokens
 
 SRCS=	$(addsuffix .c, $(addprefix srcs/builtins/, $(BUILTINS))) \
 		$(addsuffix .c, $(addprefix srcs/exec/, $(EXEC))) \
