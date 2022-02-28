@@ -43,7 +43,7 @@ int	main(int narg, char **xarg, char **env)
         	add_history(buf);
 			//signal(SIGINT, signal_handler);
 			//signal(SIGQUIT, SIG_IGN);
-			this.tokenst = babelfish(ft_strjoin(buf, "\0"), env);		//PARSER
+			this.tokenst = babelfish(ft_strjoin(buf, "\0"), this.env);		//PARSER
 			execalibur(&this);
 		}
 		else

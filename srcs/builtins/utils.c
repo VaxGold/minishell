@@ -31,7 +31,7 @@ char	**ms_matrix_add_line(char **matrix, char *new_line)
 	new_matrix[i] = ft_strdup(new_line);
 	i++;
 	new_matrix[i] = NULL;
-	ft_free_tab(matrix);
+	//ft_free_tab(matrix);
 	return (new_matrix);
 }
 
@@ -49,7 +49,7 @@ char	**ms_matrix_remove_line(char **matrix, char *line)
 	i = 0;
 	while (matrix[i])
 	{
-		if (ft_strcmp(matrix[i], line) == 0)
+		if (ft_strncmp(matrix[i], line, ft_strlen(line)) == 0)
 			i++;
 		if (matrix[i])
 		{

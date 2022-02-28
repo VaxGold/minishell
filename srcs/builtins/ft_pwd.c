@@ -13,20 +13,20 @@
 // #include "../../includes/builtins.h"
 #include "../../includes/minishell.h"
 
-// int	ft_get_pwd(char **arg, char **env)
-// {
-// 	char	c[PATH_MAX];
+int	ft_get_pwd(t_ms *data)
+{
+	char	c[PATH_MAX];
 
-// 	*arg = 0;
-// 	*env = 0;
-// 	if (getcwd(c, sizeof(c)) == NULL)
-// 		return (1);
-// 	printf("%s\n", c);
-// 	return (0);
-// }
+	(void)data;
+	if (getcwd(c, sizeof(c)) == NULL)
+		return (1);
+	printf("%s\n", c);
+	return (0);
+}
 
 int	ft_pwd(t_ms *data)
 {
+	ft_get_pwd(data);
 	printf("Soy ft_pwd en el token: %s.\n", ((t_token *)(data->tokenst->content))->args[0]);
 	return (0);
 }

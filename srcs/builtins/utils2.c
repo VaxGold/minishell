@@ -27,12 +27,13 @@ void	ft_sort_tab(char **arr)
 	size_t	j;
 
 	i = 0;
+	printf("Sorting...\n");
 	while (arr[i])
 	{
 		j = i + 1;
 		while (arr[j])
 		{
-			if (ft_strcmp(arr[i], arr[j]) > 0)
+			if (ft_strncmp(arr[i], arr[j], ft_strlen(arr[i])) > 0)
 				swap(&arr[i], &arr[j]);
 			++j;
 		}
