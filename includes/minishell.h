@@ -94,8 +94,5 @@ int		ft_unset(t_ms *data);
 
 void	secure_free(char *str);
 void	free_strarr(char **array);
-void	display_array(char **arr, char *str);
-void	display_lst(t_list *lst, char *str);
-void	display_tokens(t_list *token);
 
 #endif

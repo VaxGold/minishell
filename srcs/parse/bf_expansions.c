@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 17:41:07 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/20 20:01:58 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/01 19:42:32 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ char	*exp_variable(char *expand, char **env)
 	char	*temp;
 
 	i = 0;
-	printf("EXPAND-->%s\n", expand);
 	mod = ft_strdup("");
 	temp = ft_strjoin(expand, "=");
 	while (env[i])

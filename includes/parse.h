@@ -70,4 +70,8 @@ int		*bf_escapes(char *str);
 char	*bf_expansions(char *str, char **env);
 char	*bf_delquotes(char *str);
 
+void	display_array(char **arr, char *str);
+void	display_lst(t_list *lst, char *str);
+void	display_tokens(t_list *token);
+
 #endif
