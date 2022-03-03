@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 18:08:18 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/22 19:49:53 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/02 19:33:41 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	add_argument(char *line, t_list **argst, char **env)
 {
 	if (ft_strlen(line) < 1)
 		return ;
-	line = ft_strdup(bf_expansions(line, env));
+	line = bf_expansions(line, env);
+	//Dividir
 	line = bf_delquotes(line);
 	ft_lstadd_back(argst, ft_lstnew((void *)line));
 	return ;
@@ -25,9 +26,11 @@ void	add_argument(char *line, t_list **argst, char **env)
 int	fetch_simbol(char *line, char **simbol)
 {
 	int i;
+	char	checker;
 
 	i = 0;
-	while (line[i] == '<' || line[i] == '>')
+	checker = line[i];
+	while (line[i] == checker)
 		i++;
 	if (i > 3)
 		return (0);
@@ -62,7 +65,7 @@ int	add_redirection(char *line, t_list **lst, char **env)
 		free(aux);
 		ft_lstadd_back(lst, ft_lstnew(this));
 	}
-	return (i);
+	return (i - 1);
 }
 
 void	bf_split(char *line, t_token *token, t_list **argst, char **env)
@@ -74,7 +77,7 @@ void	bf_split(char *line, t_token *token, t_list **argst, char **env)
 	quotes = bf_escapes(line);
 	start = 0;
 	i = 0;
-	while ( (size_t)i < ft_strlen(line))
+	while ((size_t)i < ft_strlen(line))
 	{
 		if ((line[i] == ' ' || line[i] == '<' || line[i] == '>') && quotes[i] == 0)
 		{

@@ -33,6 +33,9 @@
 ** STRUCTS & ENUMS
 */
 
+int g_signal;
+int	g_exit_status;
+
 typedef	enum e_redir_type
 {
 	redir_out,
@@ -55,9 +58,8 @@ typedef struct		s_token
 
 typedef struct		s_redirect
 {
-	char			**args;
+	char			**args;	
 	char			*simbol;
-	t_redir_type	type;
 }					t_redirect;
 
 /*
@@ -69,5 +71,9 @@ void	bf_split(char *line, t_token *token, t_list **largs, char **env);
 int		*bf_escapes(char *str);
 char	*bf_expansions(char *str, char **env);
 char	*bf_delquotes(char *str);
+
+void	display_array(char **arr, char *str);
+void	display_lst(t_list *lst, char *str);
+void	display_tokens(t_list *token);
 
 #endif

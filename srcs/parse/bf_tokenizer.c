@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bf_tokenizer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-do <adiaz-do@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 19:31:59 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/11 16:48:17 by adiaz-do         ###   ########.fr       */
+/*   Updated: 2022/03/02 19:33:26 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	**lsttoargs(t_list **argst)
 	char	**args;
 	int		len;
 	int		i;
-	
+
 	len = ft_lstsize(*argst);
 	if (len < 1)
 		return (NULL);
@@ -41,7 +41,7 @@ t_list	*bf_tokenizer(char *buf, char **env)
 	t_token	*new;
 	t_list	*argst;
 
-	if (ft_strlen(buf) <= 0)			//Buffer vacio??
+	if (ft_strlen(buf) <= 0)
 	{
 		free (buf);
 		return (NULL);
@@ -52,14 +52,15 @@ t_list	*bf_tokenizer(char *buf, char **env)
 	new->in = NULL;
 	new->out = NULL;
 	argst = NULL;
-	bf_split(buf, new, &argst, env);		//No tiene salida??
+	bf_split(buf, new, &argst, env);
+	//bf_divisor(buf, new, &argst, env);
 	if (argst != NULL)
 	{
 		new->args = lsttoargs(&argst);
 		ft_lstclear(&argst, free);
 	}
 	else
-		 new->args = NULL;
+		new->args = NULL;
 	free (buf);
 	return (ft_lstnew(new));
 }

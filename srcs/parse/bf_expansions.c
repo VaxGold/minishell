@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 17:41:07 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/20 20:01:58 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/02 13:07:21 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	iseov(char c)
 		return (1);
 	else if (c == ' ')
 		return (1);
-	else if (c == '?')
-		return (0);
+	else if (c == '?')			//Modificado
+		return (1);
 	else if (c == 34)
 		return (1);
 	else if (c == 39)
@@ -44,8 +44,9 @@ char	*exp_variable(char *expand, char **env)
 	char	*temp;
 
 	i = 0;
-	printf("EXPAND-->%s\n", expand);
 	mod = ft_strdup("");
+	if (!ft_strcmp("?\0", expand))
+		return(ft_itoa(g_signal));
 	temp = ft_strjoin(expand, "=");
 	while (env[i])
 	{
@@ -84,7 +85,9 @@ int		exp_length(char *str)
 	len = 1;
 	while (str[len])
 	{
-		if (iseov(str[len]) || (str[len] == '?' && str[len - 1] == '?'))
+		if (str[len] == '?')
+			return (len + 1);
+		else if (iseov(str[len]))
 			return (len);
 		len++;
 	}
