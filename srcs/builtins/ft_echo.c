@@ -30,8 +30,9 @@ int	ft_echo(t_ms *data)
 	int		fd;
 	char	**args;
 
-	fd = data->fd_out;
-	args = ((t_token *)(data->tokenst->content))->args;
+	args = ((t_token *)(data->actual_token->content))->args;
+	fd = ((t_token *)(data->actual_token->content))->fd_out;
+	printf("%d\n", fd);
 	i = 1;
 	n_opt = 0;
 	if (n_args(args) > 1)
