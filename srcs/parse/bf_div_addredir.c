@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 15:18:13 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/02 19:54:31 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/03 19:32:30 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	fetch_simbol(char *line, char **simbol)
 {
-	int i;
+	int		i;
 	char	checker;
 
 	i = 0;
@@ -25,28 +25,65 @@ static int	fetch_simbol(char *line, char **simbol)
 	return (i);
 }
 
-int	count_strings(char const *s, char c)
+static int	word_count(char *s)
 {
-	int	act_pos;
-	int	str_count;
+	int		comp;
+	int		cles;
+	int		*quotes;
 
-	act_pos = 0;
-	str_count = 0;
-	if (s[act_pos] == c)
-		str_count--;
-	while (s[act_pos] != '\0')
+	quotes = bf_escapes(s);
+	comp = 0;
+	cles = 0;
+	if (*s == '\0')
+		return (0);
+	while (*s != '\0')
 	{
-		if (s[act_pos] == c && s[act_pos + 1] != c && s[act_pos + 1] != '\0')
-			str_count++;
-		act_pos++;
+		if (*s == ' ')
+			cles = 0;
+		else if (cles == 0)
+		{
+			cles = 1;
+			comp++;
+		}
+		s++;
 	}
-	str_count++;
-	return (str_count);
+	free(quotes);
+	return (comp);
 }
 
-static void	redir_args(char *line, t_list **flst, t_redirect *this)
+static char	*add_argredir(char *line, int *i)
 {
-	
+	int		len;
+	int		*quotes;
+	char	*res;
+
+	quotes = bf_escapes(line);
+	len = 0;
+	while ((line[*i + len] != ' ' && quotes[*i + len] == 0) && line[*i + len] != '\0')
+		len++;
+	res = bf_delquotes(ft_substr(line, *i, len));
+	*i += len;
+	free(quotes);
+	return (res);
+}
+
+static char	**redir_args(char *line)
+{
+	char	**args;
+	int		i;
+	int		wpos;
+
+	args = malloc(sizeof(char *) * (word_count(line) + 1));
+	i = 0;
+	wpos = 0;
+	while (line[i])
+	{
+		if (line[i] != ' ')
+			args[wpos++] = add_argredir(line, &i);
+		i++;
+	}
+	args[wpos] = "\0";
+	return (args);
 }
 
 int	bf_div_addredir(char *line, t_list **lst, char **env)
@@ -69,7 +106,8 @@ int	bf_div_addredir(char *line, t_list **lst, char **env)
 	{
 		aux = ft_substr(line, len, i - len);
 		aux = bf_expansions(aux, env);
-		redir_args(aux, lst, this);
+		this->args = redir_args(aux);
+		ft_lstadd_back(lst, ft_lstnew(this));
 		free(aux);
 	}
 	return (i - 1);

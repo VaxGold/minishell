@@ -71,6 +71,9 @@ void	bf_split(char *line, t_token *token, t_list **largs, char **env);
 int		*bf_escapes(char *str);
 char	*bf_expansions(char *str, char **env);
 char	*bf_delquotes(char *str);
+void	bf_divisor(char *line, t_token *token, t_list **argst, char **env);
+void	bf_div_addarg(char *line, t_list **flst, char **env);
+int		bf_div_addredir(char *line, t_list **lst, char **env);
 
 void	display_array(char **arr, char *str);
 void	display_lst(t_list *lst, char *str);

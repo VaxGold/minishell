@@ -3,11 +3,13 @@ NAME= minishell.a
 # Agrega aquí los Sources #
 BUILTINS = ft_cd ft_echo ft_env ft_exit ft_export ft_pwd ft_unset
 
-EXEC = execalibur exe_process exe_builtin exe_redirect exe_closeprocess exe_openprocess exe_multiprocess
+EXEC = execalibur exe_process exe_builtin exe_redirect	\
+		exe_closeprocess exe_openprocess exe_multiprocess
 
 MAIN = header minishell
 
-PARSE = babelfish bf_expansions bf_split bf_tokenizer bf_escapes bf_delquotes
+PARSE = babelfish bf_expansions bf_split bf_tokenizer bf_escapes \
+			bf_delquotes bf_divisor bf_div_addarg bf_div_addredir
 
 TOOLS = secure_free free_strarr add_strarr rm_strarr display_array display_lst display_tokens
 
@@ -29,7 +31,7 @@ B=`tput bold`
 
 
 ####!- General VARS -!#######
-CFLAGS= -Wall -Werror -Wextra #-g3 -fsanitize=address
+CFLAGS= -Wall -Werror -Wextra -g3 -fsanitize=address
 OBJS= ${SRCS:.c=.o}
 RM= rm -f
 CC= gcc

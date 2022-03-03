@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 17:48:36 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/20 19:48:04 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/03 19:57:02 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*bf_delquotes(char *str)
 	i = 0;
 	start = 0;
 	res = ft_strdup("");
-	while (str[i])
+	while (i < (int)ft_strlen(str))
 	{
 		if (str[i] == '\"' || str[i]  == '\'')
 		{
