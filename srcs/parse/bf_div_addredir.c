@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 15:18:13 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/03 19:32:30 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/04 20:07:53 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static int	word_count(char *s)
 {
 	int		comp;
 	int		cles;
+	int		i;
 	int		*quotes;
 
 	quotes = bf_escapes(s);
@@ -36,16 +37,17 @@ static int	word_count(char *s)
 	cles = 0;
 	if (*s == '\0')
 		return (0);
-	while (*s != '\0')
+	i = 0;
+	while (s[i] != '\0')
 	{
-		if (*s == ' ')
+		if (s[i] == ' ' && quotes[i] == 0)
 			cles = 0;
 		else if (cles == 0)
 		{
 			cles = 1;
 			comp++;
 		}
-		s++;
+		i++;
 	}
 	free(quotes);
 	return (comp);
@@ -59,10 +61,13 @@ static char	*add_argredir(char *line, int *i)
 
 	quotes = bf_escapes(line);
 	len = 0;
-	while ((line[*i + len] != ' ' && quotes[*i + len] == 0) && line[*i + len] != '\0')
+	while (line[*i + len] && quotes[*i + len] == 0 && line[*i + len] != ' ')
 		len++;
-	res = bf_delquotes(ft_substr(line, *i, len));
-	*i += len;
+	res = ft_substr(line, *i, len);
+	printf("str--->%s\n", res);
+	//res = bf_delquotes(ft_substr(line, *i, len));
+	res = bf_delquotes(res);
+	*i += (len - 1);
 	free(quotes);
 	return (res);
 }
@@ -72,7 +77,9 @@ static char	**redir_args(char *line)
 	char	**args;
 	int		i;
 	int		wpos;
+	int		*quotes;
 
+	quotes = bf_escapes(line);
 	args = malloc(sizeof(char *) * (word_count(line) + 1));
 	i = 0;
 	wpos = 0;
@@ -83,6 +90,7 @@ static char	**redir_args(char *line)
 		i++;
 	}
 	args[wpos] = "\0";
+	free(quotes);
 	return (args);
 }
 
@@ -92,17 +100,20 @@ int	bf_div_addredir(char *line, t_list **lst, char **env)
 	char		*aux;
 	int			len;
 	int			i;
+	int			*quotes;
 
+	quotes = bf_escapes(line);
 	this = malloc(sizeof(t_redirect));
 	if (!this)
 		return (0);
 	len = fetch_simbol(line, &this->simbol);
+	while (line[len] && line[len] == ' ')
+		len++;
 	i = len;
-	while (line[i] && line[i] == ' ')
+	while (line[i] && !((line[i] == ' ' || line[i] == '<' || line[i] == '>') && quotes[i] == 0))
 		i++;
-	while (line[i] && line[i] != ' ' && line[i] != '<' && line[i] != '>')		//quotes?
-		i++;
-	if (len > 0)
+	free(quotes);
+	if (i - len > 0)
 	{
 		aux = ft_substr(line, len, i - len);
 		aux = bf_expansions(aux, env);

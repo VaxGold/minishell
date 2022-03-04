@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 19:31:59 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/02 19:33:26 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/04 17:51:38 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,7 @@ t_list	*bf_tokenizer(char *buf, char **env)
 	new->in = NULL;
 	new->out = NULL;
 	argst = NULL;
-	bf_split(buf, new, &argst, env);
-	//bf_divisor(buf, new, &argst, env);
+	bf_divisor(buf, new, &argst, env);
 	if (argst != NULL)
 	{
 		new->args = lsttoargs(&argst);
