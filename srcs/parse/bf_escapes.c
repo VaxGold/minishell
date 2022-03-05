@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 17:41:39 by omercade          #+#    #+#             */
-/*   Updated: 2022/01/27 18:04:24 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/04 18:14:11 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,17 @@ int	escape_level(int *this, char *str, int i, int set)
 	if (str[i] == '\'')
 	{
 		if (set == 2)
+		{
 			set = 0;
+			this[i] = 2;
+		}
+		else if (set == 1)
+			this[i] = set;
 		else
+		{
 			set = 2;
-		this[i] = 2;
+			this[i] = 2;
+		}
 	}
 	else if (str[i] == '\"')
 	{
