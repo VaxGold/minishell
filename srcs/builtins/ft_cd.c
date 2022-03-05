@@ -36,14 +36,28 @@ char	*ms_get_env(char **env, char *arg)
 	return (env[i]);
 }
 
-void	set_pwd(char *arg, char *path)
+char	**set_pwd(char *arg, char *path, char **env)
 {
 	char	*string;
 
 	string = ft_strjoin(arg, path);
-	printf("%s\n", string);
-	//ms_set_env(env, string);
+	env = rm_strarr(env, arg);
+	env = add_strarr(env, string);
 	free (string);
+	return(env);
+}
+
+char	*go_home(char **env)
+{
+	char	*path;
+
+	path = ms_get_env(env, "HOME") + 5;
+	if ((path - 5) == NULL)
+	{
+		printf("cd: HOME not set\n");
+		return (NULL);
+	}
+	return(path);
 }
 
 int	ft_cd(t_ms *data)
@@ -52,18 +66,10 @@ int	ft_cd(t_ms *data)
 	char	**arg;
 	char	*path;
 
-	(void)data;
 	arg = ((t_token *)(data->tokenst->content))->args;
-	/*if (arg == NULL)
-	{
-		home_path = ms_get_env(data->env, "HOME") + 5;
-		if ((home_path - 5) == NULL)
-		{
-			printf("cd: HOME not set\n");
-			return (1);
-		}
-	}*/
 	path = arg[1];
+	if (arg[1] == NULL)
+		path = go_home(data->env);
 	getcwd(c, sizeof(c));
 	if (chdir(path) == -1)
 	{
@@ -74,8 +80,8 @@ int	ft_cd(t_ms *data)
 		ft_putendl_fd(": No such file or directory", 2);
 		return (1);
 	}
-	set_pwd("OLDPWD=", c);
+	data->env = set_pwd("OLDPWD=", c, data->env);
 	getcwd(c, sizeof(c));
-	set_pwd("PWD=", c);
+	data->env = set_pwd("PWD=", c, data->env);
 	return (0);
 }

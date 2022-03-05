@@ -16,19 +16,18 @@
 int	ft_env(t_ms *data)
 {
 	int	i;
+	int fd;
 
 	i = 0;
+	fd = ((t_token *)(data->actual_token->content))->fd_out;
 	while (data->env[i])
 	{
 		if (strchr(data->env[i], '=') != NULL)
-			printf("%s\n", data->env[i]);
+		{
+			ft_putstr_fd(data->env[i], fd);
+			write(fd, "\n", 1);
+		}
 		i++;
 	}
 	return (0);
 }
-/*
-int	ft_env(t_ms *data)
-{
-	printf("Soy ft_env en el token: %s.\n", ((t_token *)(data->tokenst->content))->args[0]);
-	return (0);
-}*/

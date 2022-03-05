@@ -29,7 +29,7 @@ B=`tput bold`
 
 
 ####!- General VARS -!#######
-CFLAGS= -Wall -Werror -Wextra #-g3 -fsanitize=address
+CFLAGS= -Wall -Werror -Wextra -g3 -fsanitize=address
 OBJS= ${SRCS:.c=.o}
 RM= rm -f
 CC= gcc
@@ -44,7 +44,7 @@ ${NAME}: ${OBJS}
 	@cp ./Libft/libft.a .
 	@ar -rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
-	$(CC) $(CFLAGS) $(SRCS) libft.a -o minishell -lreadline
+	$(CC) $(CFLAGS) $(SRCS) libft.a -o minishell -lreadline -lreadline -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 	@mv libft.a ./srcs
 
 all: ${NAME}

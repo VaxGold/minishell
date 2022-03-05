@@ -18,6 +18,5 @@ char	**add_strarr(char **matrix, char *new_line)
 	new_matrix[i] = ft_strdup(new_line);
 	i++;
 	new_matrix[i] = NULL;
-	//ft_free_tab(matrix);
 	return (new_matrix);
 }

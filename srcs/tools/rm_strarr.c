@@ -23,6 +23,6 @@ char	**rm_strarr(char **matrix, char *line)
 		}
 	}
 	new_matrix[j] = NULL;
-	free_strarr(matrix);
+	//free_strarr(matrix);
 	return (new_matrix);
 }

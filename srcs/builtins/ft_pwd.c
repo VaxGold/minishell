@@ -16,11 +16,13 @@
 int	ft_get_pwd(t_ms *data)
 {
 	char	c[PATH_MAX];
+	int		fd;
 
-	(void)data;
+	fd = ((t_token *)(data->actual_token->content))->fd_out;
 	if (getcwd(c, sizeof(c)) == NULL)
 		return (1);
-	printf("%s\n", c);
+	ft_putstr_fd(c, fd);
+	ft_putstr_fd("\n", fd);
 	return (0);
 }
 

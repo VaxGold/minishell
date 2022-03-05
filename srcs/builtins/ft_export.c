@@ -97,7 +97,7 @@ char	*ms_make_string(char *arg)
 	return (string);
 }
 
-void	ms_export_sort(char **env_export)
+void	ms_export_sort(char **env_export, int fd)
 {
 	int	i;
 	char	*string;
@@ -107,15 +107,15 @@ void	ms_export_sort(char **env_export)
 	while (env_export[i])
 	{
 		string = ms_make_string(env_export[i++]);
-		printf("declare -x %s\n", string);
+		ft_putstr_fd("declare -x ", fd);
+		ft_putstr_fd(string, fd);
+		ft_putstr_fd("\n", fd);
 		free(string);
 	}
 }
 
 char	**ms_export_valid_arg(char *arg, char *strings, char **env)
 {
-	//char	*string;
-
 	if (ft_strchr(arg, '=') == NULL)
 	{
 		if (ms_get_env(env, strings) == NULL)
@@ -123,7 +123,6 @@ char	**ms_export_valid_arg(char *arg, char *strings, char **env)
 	}
 	else
 	{
-		//string = ms_make_string(arg);
 		if (ms_get_env(env, strings) == NULL)
 			env = add_strarr(env, arg);
 		else
@@ -131,7 +130,6 @@ char	**ms_export_valid_arg(char *arg, char *strings, char **env)
 			env = rm_strarr(env, strings);
 			env = add_strarr(env, arg);
 		}
-		//free(string);
 	}
 	return (env);
 }
@@ -142,8 +140,10 @@ int	ft_export(t_ms *data)
 	int		i;
 	int		ret;
 	char	**arg;
+	int 	fd;
 
 	arg = ((t_token *)(data->tokenst->content))->args;
+	fd = ((t_token *)(data->actual_token->content))->fd_out;
 	ret = 0;
 	i = 1;
 	while (arg[i])
@@ -160,12 +160,6 @@ int	ft_export(t_ms *data)
 		i++;
 	}
 	if (i == 1)
-		ms_export_sort(data->env);
+		ms_export_sort(data->env, fd);
 	return (ret);
 }
-/*
-int	ft_export(t_ms *data)
-{
-	printf("Soy ft_export en el token: %s.\n", ((t_token *)(data->tokenst->content))->args[0]);
-	return (0);
-}*/

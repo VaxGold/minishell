@@ -32,7 +32,6 @@ int	ft_echo(t_ms *data)
 
 	args = ((t_token *)(data->actual_token->content))->args;
 	fd = ((t_token *)(data->actual_token->content))->fd_out;
-	printf("%d\n", fd);
 	i = 1;
 	n_opt = 0;
 	if (n_args(args) > 1)
@@ -53,11 +52,4 @@ int	ft_echo(t_ms *data)
 	if (n_opt == 0)
 		write(fd, "\n", 1);
 	return (0);
- }
-
-/*
-int	ft_echo(t_ms *data)
-{
-	printf("Soy ft_echo en el token: %s.\n", ((t_token *)(data->tokenst->content))->args[0]);
-	return (0);
-}*/
+}

@@ -34,7 +34,7 @@
  void	ft_free_tab(char **tab);
 void	ft_sort_tab(char **arr);
 char	*ft_strjoin_free_s1(char *s1, char const *s2);
-void	set_pwd(char *arg, char	*path);
+//void	set_pwd(char *arg, char	*path);
 char	**add_strarr(char **matrix, char *new_line);
 char	**rm_strarr(char **matrix, char *line);
 
