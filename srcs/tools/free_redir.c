@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clear.c                                            :+:      :+:    :+:   */
+/*   free_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-do <adiaz-do@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/10 20:41:48 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/10 19:50:29 by adiaz-do         ###   ########.fr       */
+/*   Created: 2022/03/06 19:57:35 by omercade          #+#    #+#             */
+/*   Updated: 2022/03/06 20:12:01 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	clear(void)
+void	free_redir(void *content)
 {
-	printf("\033[H\033[J");
-	return ;
+	t_redirect	*temp;
+
+	temp = (t_redirect *)content;
+	free_strarr(temp->args);
+	free(temp->simbol);
+	if (temp)
+		free(temp);
 }
