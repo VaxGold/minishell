@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 18:07:23 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/06 17:23:13 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/06 17:45:12 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	execalibur(t_ms *data)
 {
 	t_token	*token;
 
-	if (!((t_token *)(data->tokenst)))
+	if (!data->tokenst || !((t_token *)(data->tokenst->content))->args)
 		return ;
 	data->actual_token = data->tokenst;
 	if (!data->actual_token->next)
