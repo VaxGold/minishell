@@ -14,7 +14,7 @@
 
 int	ft_arrlen(char **arr)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!arr)

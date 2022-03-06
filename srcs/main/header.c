@@ -12,14 +12,14 @@
 
 #include "../../includes/minishell.h"
 
-void    header(void)
+void	header(void)
 {
-    printf(RED "           _       _      _          _ _ \n");
-    printf("          (_)     (_)    | |        | | |\n");
-    printf(" _ __ ___  _ _ __  _  ___| |__   ___| | |\n");
-    printf("| '_ ` _ \\| | '_ \\| |/ __| '_ \\ / _ \\ | |\n");
-    printf("| | | | | | | | | | |\\__ \\ | | |  __/ | |\n");
-    printf("|_| |_| |_|_|_| |_|_||___/_| |_|\\___|_|_|");
+	printf(RED "           _       _      _          _ _ \n");
+	printf("          (_)     (_)    | |        | | |\n");
+	printf(" _ __ ___  _ _ __  _  ___| |__   ___| | |\n");
+	printf("| '_ ` _ \\| | '_ \\| |/ __| '_ \\ / _ \\ | |\n");
+	printf("| | | | | | | | | | |\\__ \\ | | |  __/ | |\n");
+	printf("|_| |_| |_|_|_| |_|_||___/_| |_|\\___|_|_|");
 	printf(YELLOW "\tHello %s\n\n" NC, getenv("USER"));
 	return ;
 }
