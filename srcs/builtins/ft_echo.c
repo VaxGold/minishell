@@ -23,6 +23,29 @@ int	n_args(char **args)
 	return (len);
 }
 
+int	n_flag(char **args)
+{
+	int ret;
+	int i;
+	int j;
+
+	i = 1;
+	ret = 0;
+	while (ft_strncmp(args[i], "-n", 2) == 0)
+	{
+		j = 1;
+		while (args[i][j])
+		{
+			if (args[i][j] != 'n')
+				return(ret);
+			j++;
+		}
+		ret++;
+		i++;
+	}
+	return(ret);
+}
+
 int	ft_echo(t_ms *data)
 {
 	int		i;
@@ -36,11 +59,8 @@ int	ft_echo(t_ms *data)
 	n_opt = 0;
 	if (n_args(args) > 1)
 	{
-		while (args[i] && ft_strcmp(args[i], "-n") == 0)
-		{
-			n_opt = 1;
-			i++;
-		}
+		n_opt = n_flag(args);
+		i += n_opt;
 		while (args[i])
 		{
 			ft_putstr_fd(args[i], fd);
