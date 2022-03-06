@@ -13,6 +13,26 @@
 #include "../../includes/minishell.h"
 #include <signal.h>
 
+char	**get_env(char **env)
+{
+	int		i;
+	char	**myenv;
+
+	i = 0;
+	while (env[i] != NULL)
+		i++;
+	myenv = malloc((i + 1) * sizeof(char *));
+	i = 0;
+	while (env[i] != NULL)
+	{
+		myenv[i] = ft_strdup(env[i]);
+		i++;
+		//printf("%s\n", myenv[i]);
+	}
+	myenv[i] = NULL;
+	return(myenv);
+}
+
 int	main(int narg, char **xarg, char **env)
 {
 	t_ms	this;
@@ -22,7 +42,7 @@ int	main(int narg, char **xarg, char **env)
 	if (narg != 1)
 		return (!printf("ARGS ERROR!!\n"));
 	this.exit = 0;
-	this.env = env;
+	this.env = get_env(env);
 	header();
 	while (this.exit == 0)
 	{
@@ -41,6 +61,7 @@ int	main(int narg, char **xarg, char **env)
 		free(buf);
 	}
 	/*FREES*/
+	free(this.env);
 	free_all(this);
 	return (0);
 }

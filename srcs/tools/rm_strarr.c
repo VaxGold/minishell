@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rm_strarr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sramis-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/06 23:37:40 by sramis-c          #+#    #+#             */
+/*   Updated: 2022/03/06 23:37:42 by sramis-c         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 char	**rm_strarr(char **matrix, char *line)
@@ -23,6 +35,6 @@ char	**rm_strarr(char **matrix, char *line)
 		}
 	}
 	new_matrix[j] = NULL;
-	//free_strarr(matrix);
+	free_strarr(matrix);
 	return (new_matrix);
 }
