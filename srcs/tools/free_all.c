@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_strarr.c                                      :+:      :+:    :+:   */
+/*   free_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/09 18:20:05 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/06 21:36:20 by omercade         ###   ########.fr       */
+/*   Created: 2022/03/06 19:58:06 by omercade          #+#    #+#             */
+/*   Updated: 2022/03/06 22:36:54 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	free_strarr(char **array)
+void	free_all(t_ms data)
 {
-	int	i;
-
-	i = 0;
-	if (!array)
-		return ;
-	while (array[i])
-	{
-		secure_free(array[i]);
-		i++;
-	}
-	free(array);
-	array = NULL;
+	free(data.env);
+	free(data.secret);
+	data.actual_token = NULL;
+	ft_lstclear(&data.tokenst, free_token);
 	return ;
 }

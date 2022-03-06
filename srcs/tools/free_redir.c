@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_strarr.c                                      :+:      :+:    :+:   */
+/*   free_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/09 18:20:05 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/06 21:36:20 by omercade         ###   ########.fr       */
+/*   Created: 2022/03/06 19:57:35 by omercade          #+#    #+#             */
+/*   Updated: 2022/03/06 20:12:01 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	free_strarr(char **array)
+void	free_redir(void *content)
 {
-	int	i;
+	t_redirect	*temp;
 
-	i = 0;
-	if (!array)
-		return ;
-	while (array[i])
-	{
-		secure_free(array[i]);
-		i++;
-	}
-	free(array);
-	array = NULL;
-	return ;
+	temp = (t_redirect *)content;
+	free_strarr(temp->args);
+	free(temp->simbol);
+	if (temp)
+		free(temp);
 }

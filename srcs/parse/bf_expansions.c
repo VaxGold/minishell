@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 17:41:07 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/06 17:28:59 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/06 22:03:12 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	iseov(char c)
 		return (1);
 	else if (c == ' ')
 		return (1);
-	else if (c == '?')			//Modificado
+	else if (c == '?')
 		return (1);
 	else if (c == 34)
 		return (1);
@@ -46,12 +46,13 @@ char	*exp_variable(char *expand, char **env)
 	i = 0;
 	mod = ft_strdup("");
 	if (!ft_strcmp("?\0", expand))
-		return(ft_itoa(g_exit_status));
+		return (ft_itoa(g_exit_status));
 	temp = ft_strjoin(expand, "=");
 	while (env[i])
 	{
 		if (ft_strncmp(temp, env[i], ft_strlen(temp)) == 0)
-			mod = ft_substr(env[i], ft_strlen(temp), ft_strlen(env[i]) - ft_strlen(temp));
+			mod = ft_substr(env[i], ft_strlen(temp),
+					ft_strlen(env[i]) - ft_strlen(temp));
 		i++;
 	}
 	free(expand);
@@ -78,9 +79,9 @@ char	*exp_contructor(char *str, int start, int len, char **env)
 	return (res);
 }
 
-int		exp_length(char *str)
+int	exp_length(char *str)
 {
-	int len;
+	int	len;
 
 	len = 1;
 	while (str[len])
@@ -96,25 +97,24 @@ int		exp_length(char *str)
 
 char	*bf_expansions(char *str, char **env)
 {
-	int	*quotes;
-	int	i;
-	int	start;
-	int	len;
+	int		*quotes;
+	int		i;
+	int		start;
+	int		len;
 	char	*res;
 
 	quotes = bf_escapes(str);
-	i = 0;
+	i = -1;
 	start = -1;
 	len = 0;
-	while (str[i])
+	while (str[++i])
 	{
 		if (str[i] == '$' && quotes[i] < 2)
 		{
 			start = i;
 			len = exp_length(&str[i]);
-			break;
+			break ;
 		}
-		i++;
 	}
 	free(quotes);
 	if (start == -1)

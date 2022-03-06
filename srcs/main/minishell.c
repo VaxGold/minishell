@@ -6,14 +6,12 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 20:23:32 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/19 19:30:51 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/06 22:36:18 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include <signal.h>
-
-int		g_exit_status;
 
 int	main(int narg, char **xarg, char **env)
 {
@@ -25,7 +23,6 @@ int	main(int narg, char **xarg, char **env)
 		return (!printf("ARGS ERROR!!\n"));
 	this.exit = 0;
 	this.env = env;
-
 	header();
 	while (this.exit == 0)
 	{
@@ -39,9 +36,11 @@ int	main(int narg, char **xarg, char **env)
         	add_history(buf);
 			this.tokenst = babelfish(ft_strjoin(buf, "\0"), this.env);	//PARSER
 			execalibur(&this);
+			ft_lstclear(&this.tokenst, free_token);
 		}
 		free(buf);
 	}
 	/*FREES*/
+	free_all(this);
 	return (0);
 }

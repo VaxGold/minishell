@@ -67,7 +67,6 @@ typedef struct		s_redirect
 */
 t_list	*babelfish(char *buf, char **env);
 t_list	*bf_tokenizer(char *buf, char **env);
-void	bf_split(char *line, t_token *token, t_list **largs, char **env);
 int		*bf_escapes(char *str);
 char	*bf_expansions(char *str, char **env);
 char	*bf_delquotes(char *str);

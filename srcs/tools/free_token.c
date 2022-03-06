@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clear.c                                            :+:      :+:    :+:   */
+/*   free_token.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-do <adiaz-do@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/10 20:41:48 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/10 19:50:29 by adiaz-do         ###   ########.fr       */
+/*   Created: 2022/03/06 19:57:22 by omercade          #+#    #+#             */
+/*   Updated: 2022/03/06 21:25:41 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	clear(void)
+void	free_token(void *content)
 {
-	printf("\033[H\033[J");
-	return ;
+	t_token	*temp;
+
+	temp = (t_token *)content;
+	free_strarr(temp->args);
+	if (temp->in)
+		ft_lstclear(&temp->in, free_redir);
+	if (temp->out)
+		ft_lstclear(&temp->out, free_redir);
+	if (temp)
+		free(temp);
 }

@@ -8,10 +8,11 @@ EXEC = execalibur exe_process exe_builtin exe_redirect	\
 
 MAIN = header minishell signals
 
-PARSE = babelfish bf_expansions bf_split bf_tokenizer bf_escapes \
+PARSE = babelfish bf_expansions bf_tokenizer bf_escapes \
 			bf_delquotes bf_divisor bf_div_addarg bf_div_addredir
 
-TOOLS = secure_free free_strarr add_strarr rm_strarr display_array display_lst display_tokens ft_arrlen
+TOOLS = secure_free free_strarr add_strarr rm_strarr display_array \
+		display_lst display_tokens ft_arrlen free_redir free_token free_all
 
 SRCS=	$(addsuffix .c, $(addprefix srcs/builtins/, $(BUILTINS))) \
 		$(addsuffix .c, $(addprefix srcs/exec/, $(EXEC))) \
@@ -31,7 +32,7 @@ B=`tput bold`
 
 
 ####!- General VARS -!#######
-CFLAGS= -Wall -Werror -Wextra -g3 -fsanitize=address
+CFLAGS= -Wall -Werror -Wextra #-g3 -fsanitize=address
 OBJS= ${SRCS:.c=.o}
 RM= rm -f
 CC= gcc
