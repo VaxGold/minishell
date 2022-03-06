@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 22:34:49 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/26 19:26:40 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/06 17:21:15 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	exe_builtin(t_ms *data)
 	menu = menu_builtin();
 	opt = menu_option(((t_token *)(data->actual_token->content))->args[0]);
 	if (opt >= 0)
-		menu[opt](data);
+		g_exit_status = menu[opt](data);
 	free(menu);
 	return (opt);
 }

@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 15:18:13 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/04 20:07:53 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/06 17:10:13 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,9 @@ static char	*add_argredir(char *line, int *i)
 
 	quotes = bf_escapes(line);
 	len = 0;
-	while (line[*i + len] && quotes[*i + len] == 0 && line[*i + len] != ' ')
+	while (line[*i + len] && (quotes[*i + len] != 0 || line[*i + len] != ' '))
 		len++;
 	res = ft_substr(line, *i, len);
-	printf("str--->%s\n", res);
-	//res = bf_delquotes(ft_substr(line, *i, len));
 	res = bf_delquotes(res);
 	*i += (len - 1);
 	free(quotes);
