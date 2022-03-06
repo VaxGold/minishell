@@ -13,7 +13,7 @@
 // #include "../../includes/builtins.h"
 #include "../../includes/minishell.h"
 
-int	ft_get_pwd(t_ms *data)
+int	ft_pwd(t_ms *data)
 {
 	char	c[PATH_MAX];
 	int		fd;
@@ -23,11 +23,5 @@ int	ft_get_pwd(t_ms *data)
 		return (1);
 	ft_putstr_fd(c, fd);
 	ft_putstr_fd("\n", fd);
-	return (0);
-}
-
-int	ft_pwd(t_ms *data)
-{
-	ft_get_pwd(data);
 	return (0);
 }

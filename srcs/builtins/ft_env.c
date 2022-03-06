@@ -22,7 +22,7 @@ int	ft_env(t_ms *data)
 	fd = ((t_token *)(data->actual_token->content))->fd_out;
 	while (data->env[i])
 	{
-		if (strchr(data->env[i], '=') != NULL)
+		if (ft_strchr(data->env[i], '=') != NULL)
 		{
 			ft_putstr_fd(data->env[i], fd);
 			write(fd, "\n", 1);

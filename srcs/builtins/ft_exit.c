@@ -31,23 +31,22 @@ int	ft_exit(t_ms *data)
 	num = 0;
 	args = ((t_token *)(data->tokenst->content))->args;
 	if (ft_array_len(args) == 1)
+	{
+		printf("exit\n");
+		exit(0);
+	}
+	while (args[1][num] != '\0')
+		if (!ft_isdigit(args[1][num++]))
 		{
-			printf("exit\n");
-			exit(0);
+			printf("minishell: exit: %s: numeric argument required\n", args[1]);
+			exit(-1);
 		}
-//	else if (ft_array_len(args) == 2)
-//	{
-		while (args[1][num] != '\0')
-			if (!ft_isdigit(args[1][num++])){
-				printf("minishell: exit: %s: numeric argument required\n", args[1]);
-				exit(-1);}
 	if (ft_array_len(args) == 2)
-{
+	{
 		printf("exit");
 		exit(ft_atoi(args[1]));
-}
-//	}
+	}
 	else
 		printf("minishell: exit: too many arguments\n");
-	return (0);
+	return (1);
 }

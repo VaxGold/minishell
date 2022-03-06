@@ -98,4 +98,7 @@ void	secure_free(char *str);
 void	free_strarr(char **array);
 int		ft_arrlen(char **arr);
 
+void	signal_handler(int signum);
+void	signal_handler_child(int signum);
+
 #endif

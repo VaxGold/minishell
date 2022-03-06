@@ -53,6 +53,8 @@ void	execalibur(t_ms *data)
 		token->fd_out = exe_redirect(token->out, STDOUT_FILENO);
 		if (token->fd_out != -2 && exe_builtin(data) == -1)
 		{
+			signal(SIGINT, signal_handler_child);
+			signal(SIGQUIT, signal_handler_child);
 			token->pid = fork();
 			if (token->pid == 0)
 			{

@@ -3,29 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mangarci <mangarci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sramis-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/17 18:57:54 by mangarci          #+#    #+#             */
-/*   Updated: 2022/02/17 19:01:19 by mangarci         ###   ########.fr       */
+/*   Created: 2022/03/06 19:20:08 by sramis-c          #+#    #+#             */
+/*   Updated: 2022/03/06 19:20:18 by sramis-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	signal_handler(int sig)
+void	rl_replace_line(const char *str, int n);
+
+void	signal_handler_child(int signum)
 {
-	g_exit_status += sig;
-	if (sig == 2)
+	//g_exit_status += sig;
+	if (signum == SIGQUIT)
 	{
-		g_exit_status = 130;
+		//g_exit_status = 130;
+		ft_putstr_fd("Quit: 3\n", 1);
+		signal(SIGQUIT, SIG_IGN);
+	}
+	if (signum == SIGINT)
+	{
+		printf("\n");
+		signal(SIGINT, signal_handler);
+	}
+}
+
+void	signal_handler(int signum)
+{
+	//g_exit_status += sig;
+	if (signum == SIGINT)
+	{
+		//g_exit_status = 130;
 		printf("\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
-	}
-	if (sig == SIGQUIT)
-	{
-		write(2, "Quit\n", ft_strlen("Quit\n");
-				exit (1);
 	}
 }

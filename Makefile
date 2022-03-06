@@ -6,7 +6,7 @@ BUILTINS = ft_cd ft_echo ft_env ft_exit ft_export ft_pwd ft_unset
 EXEC = execalibur exe_process exe_builtin exe_redirect	\
 		exe_closeprocess exe_openprocess exe_multiprocess
 
-MAIN = header minishell
+MAIN = header minishell signals
 
 PARSE = babelfish bf_expansions bf_split bf_tokenizer bf_escapes \
 			bf_delquotes bf_divisor bf_div_addarg bf_div_addredir

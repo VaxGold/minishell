@@ -13,53 +13,28 @@
 #include "../../includes/minishell.h"
 #include <signal.h>
 
-void	rl_replace_line(const char *str, int n);
-
 int		g_exit_status;
-
-void	signal_handler(int signum)
-{
-	//g_exit_status += sig;
-	if (signum == SIGINT)
-	{
-		//g_exit_status = 130;
-		printf("\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
-	if (signum == SIGQUIT)
-	{
-		write(2, "Exit\n", 5);
-		exit (0);
-	}
-}
 
 int	main(int narg, char **xarg, char **env)
 {
 	t_ms	this;
 	char	*buf;
 
-
-	//(void) narg;
-	(void) xarg;
-	//(void) env;		//DELETE!
+	(void)xarg;
 	if (narg != 1)
 		return (!printf("ARGS ERROR!!\n"));
-	/*INITIALIZE*/
-	//g_exit_status = 0;
 	this.exit = 0;
 	this.env = env;
-	signal(SIGINT, signal_handler);
-	signal(SIGQUIT, signal_handler);
-	//reset_fds
-	//set_env & set_secret_env
-	/*END_INIT*/
+
 	header();
 	while (this.exit == 0)
 	{
+		signal(SIGQUIT, SIG_IGN);
+		signal(SIGINT, signal_handler);
 		buf = readline(BLUE "minishell:/>" WHITE" ");
-		if (buf)
+		if (!buf)
+			exit(!printf("exit\n"));
+		if (buf && *buf != '\0')
 		{
         	add_history(buf);
 			this.tokenst = babelfish(ft_strjoin(buf, "\0"), this.env);	//PARSER

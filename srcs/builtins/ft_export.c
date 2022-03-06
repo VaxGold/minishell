@@ -92,7 +92,6 @@ char	*ms_make_string(char *arg)
 	free(string);
 	string = ft_strjoin(tmp, "\"");
 	free(tmp);
-
 	free_strarr(strings);
 	return (string);
 }
@@ -151,8 +150,8 @@ int	ft_export(t_ms *data)
 		if (ms_check_export_arg(arg[i]) != 0)
 		{
 			i++;
-			continue ;
 			ret = 1;
+			continue ;
 		}
 		strings = ft_split(arg[i], '=');
 		data->env = ms_export_valid_arg(arg[i], strings[0], data->env);
