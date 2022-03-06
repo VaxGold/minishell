@@ -16,7 +16,7 @@
 int	ft_env(t_ms *data)
 {
 	int	i;
-	int fd;
+	int	fd;
 
 	i = 0;
 	fd = ((t_token *)(data->actual_token->content))->fd_out;

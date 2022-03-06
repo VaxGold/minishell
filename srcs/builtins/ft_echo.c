@@ -25,9 +25,9 @@ int	n_args(char **args)
 
 int	n_flag(char **args)
 {
-	int ret;
-	int i;
-	int j;
+	int	ret;
+	int	i;
+	int	j;
 
 	i = 1;
 	ret = 0;
@@ -37,13 +37,13 @@ int	n_flag(char **args)
 		while (args[i][j])
 		{
 			if (args[i][j] != 'n')
-				return(ret);
+				return (ret);
 			j++;
 		}
 		ret++;
 		i++;
 	}
-	return(ret);
+	return (ret);
 }
 
 int	ft_echo(t_ms *data)

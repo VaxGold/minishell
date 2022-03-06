@@ -10,36 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "../../includes/builtins.h"
 #include "../../includes/minishell.h"
-
-static void	swap(char **a, char **b)
-{
-	char	*tmp;
-
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
-}
-
-void	ft_sort_tab(char **arr)
-{
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	while (arr[i])
-	{
-		j = i + 1;
-		while (arr[j])
-		{
-			if (ft_strncmp(arr[i], arr[j], ft_strlen(arr[i])) > 0)
-				swap(&arr[i], &arr[j]);
-			++j;
-		}
-		++i;
-	}
-}
 
 int	ms_check_export_arg(char *arg)
 {
@@ -64,16 +35,12 @@ int	ms_check_export_arg(char *arg)
 	return (0);
 }
 
-char	*ms_make_string(char *arg)
+char	*ms_make_string(char **strings, char *string)
 {
-	char	**strings;
-	char	*string;
 	char	*tmp;
 	int		i;
 
 	i = 1;
-	strings = ft_split(arg, '=');
-	string = ft_strjoin(strings[0], "=\"");
 	while (strings[i] && strings[i + 1])
 	{
 		tmp = ft_strjoin(string, strings[i++]);
@@ -98,14 +65,18 @@ char	*ms_make_string(char *arg)
 
 void	ms_export_sort(char **env_export, int fd)
 {
-	int	i;
+	int		i;
 	char	*string;
+	char	**spl;
+	char	*str;
 
 	i = 0;
 	ft_sort_tab(env_export);
 	while (env_export[i])
 	{
-		string = ms_make_string(env_export[i++]);
+		spl = ft_split(env_export[i++], '=');
+		str = ft_strjoin(spl[0], "=\"");
+		string = ms_make_string(spl, str);
 		ft_putstr_fd("declare -x ", fd);
 		ft_putstr_fd(string, fd);
 		ft_putstr_fd("\n", fd);
@@ -139,7 +110,7 @@ int	ft_export(t_ms *data)
 	int		i;
 	int		ret;
 	char	**arg;
-	int 	fd;
+	int		fd;
 
 	arg = ((t_token *)(data->tokenst->content))->args;
 	fd = ((t_token *)(data->actual_token->content))->fd_out;
@@ -154,9 +125,8 @@ int	ft_export(t_ms *data)
 			continue ;
 		}
 		strings = ft_split(arg[i], '=');
-		data->env = ms_export_valid_arg(arg[i], strings[0], data->env);
+		data->env = ms_export_valid_arg(arg[i++], strings[0], data->env);
 		free_strarr(strings);
-		i++;
 	}
 	if (i == 1)
 		ms_export_sort(data->env, fd);

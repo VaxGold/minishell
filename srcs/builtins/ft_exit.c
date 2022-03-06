@@ -13,7 +13,7 @@
 // #include "../../includes/builtins.h"
 #include "../../includes/minishell.h"
 
-int ft_array_len(char **cmd)
+int	ft_array_len(char **cmd)
 {
 	int	i;
 
@@ -30,21 +30,21 @@ int	ft_exit(t_ms *data)
 
 	num = 0;
 	args = ((t_token *)(data->tokenst->content))->args;
-	if (ft_array_len(args) == 1)
+	while (ft_array_len(args) != 1 && args[1][num] != '\0')
 	{
-		printf("exit\n");
-		exit(0);
-	}
-	while (args[1][num] != '\0')
 		if (!ft_isdigit(args[1][num++]))
 		{
 			printf("minishell: exit: %s: numeric argument required\n", args[1]);
 			exit(-1);
 		}
-	if (ft_array_len(args) == 2)
+	}
+	if (ft_array_len(args) == 2 || ft_array_len(args) == 1)
 	{
-		printf("exit");
-		exit(ft_atoi(args[1]));
+		printf("exit\n");
+		if (ft_array_len(args) == 2)
+			exit(ft_atoi(args[1]));
+		else
+			exit(0);
 	}
 	else
 		printf("minishell: exit: too many arguments\n");

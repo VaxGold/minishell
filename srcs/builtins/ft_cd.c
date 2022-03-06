@@ -44,7 +44,7 @@ char	**set_pwd(char *arg, char *path, char **env)
 	env = rm_strarr(env, arg);
 	env = add_strarr(env, string);
 	free (string);
-	return(env);
+	return (env);
 }
 
 char	*go_home(char **env)
@@ -57,7 +57,7 @@ char	*go_home(char **env)
 		printf("cd: HOME not set\n");
 		return (NULL);
 	}
-	return(path);
+	return (path);
 }
 
 int	ft_cd(t_ms *data)
