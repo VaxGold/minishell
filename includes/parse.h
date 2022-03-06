@@ -74,6 +74,7 @@ void	bf_divisor(char *line, t_token *token, t_list **argst, char **env);
 void	bf_div_addarg(char *line, t_list **flst, char **env);
 int		bf_div_addredir(char *line, t_list **lst, char **env);
 
+int		word_count(char *s);
 void	display_array(char **arr, char *str);
 void	display_lst(t_list *lst, char *str);
 void	display_tokens(t_list *token);

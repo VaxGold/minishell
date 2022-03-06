@@ -96,6 +96,7 @@ int		ft_unset(t_ms *data);
 
 void	secure_free(char *str);
 int		ft_arrlen(char **arr);
+void	ft_sort_tab(char **arr);
 void	free_strarr(char **array);
 void	free_redir(void *content);
 void	free_token(void *content);

@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 15:18:13 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/06 21:18:46 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/06 23:17:47 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,33 +25,33 @@ static int	fetch_simbol(char *line, char **simbol)
 	return (i);
 }
 
-static int	word_count(char *s)
-{
-	int		comp;
-	int		cles;
-	int		i;
-	int		*quotes;
+// static int	word_count(char *s)
+// {
+// 	int		comp;
+// 	int		cles;
+// 	int		i;
+// 	int		*quotes;
 
-	quotes = bf_escapes(s);
-	comp = 0;
-	cles = 0;
-	if (*s == '\0')
-		return (0);
-	i = 0;
-	while (s[i] != '\0')
-	{
-		if (s[i] == ' ' && quotes[i] == 0)
-			cles = 0;
-		else if (cles == 0)
-		{
-			cles = 1;
-			comp++;
-		}
-		i++;
-	}
-	free(quotes);
-	return (comp);
-}
+// 	quotes = bf_escapes(s);
+// 	comp = 0;
+// 	cles = 0;
+// 	if (*s == '\0')
+// 		return (0);
+// 	i = 0;
+// 	while (s[i] != '\0')
+// 	{
+// 		if (s[i] == ' ' && quotes[i] == 0)
+// 			cles = 0;
+// 		else if (cles == 0)
+// 		{
+// 			cles = 1;
+// 			comp++;
+// 		}
+// 		i++;
+// 	}
+// 	free(quotes);
+// 	return (comp);
+// }
 
 static char	*add_argredir(char *line, int *i)
 {
@@ -92,6 +92,17 @@ static char	**redir_args(char *line)
 	return (args);
 }
 
+int	skipper(char *line, int len, int *quotes)
+{
+	int	i;
+
+	i = len;
+	while (line[i] && !((line[i] == ' ' || line[i] == '<'
+				|| line[i] == '>') && quotes[i] == 0))
+		i++;
+	return (i);
+}
+
 int	bf_div_addredir(char *line, t_list **lst, char **env)
 {
 	t_redirect	*this;
@@ -107,10 +118,7 @@ int	bf_div_addredir(char *line, t_list **lst, char **env)
 	len = fetch_simbol(line, &this->simbol);
 	while (line[len] && line[len] == ' ')
 		len++;
-	i = len;
-	while (line[i] && !((line[i] == ' ' || line[i] == '<'
-				|| line[i] == '>') && quotes[i] == 0))
-		i++;
+	i = skipper(line, len, quotes);
 	free(quotes);
 	if (i - len > 0)
 	{
