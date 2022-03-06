@@ -6,39 +6,45 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 17:41:39 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/04 18:14:11 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/06 21:03:03 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parse.h"
 
+int	el_simple(int *set)
+{
+	if (*set == 2)
+	{
+		*set = 0;
+		return (2);
+	}
+	else if (*set == 1)
+		return (*set);
+	else
+	{
+		*set = 2;
+		return (2);
+	}
+}
+
+int	el_double(int *set)
+{
+	if (*set == 2)
+		return (*set);
+	else
+	{
+		*set = !(*set);
+		return (1);
+	}
+}
+
 int	escape_level(int *this, char *str, int i, int set)
 {
 	if (str[i] == '\'')
-	{
-		if (set == 2)
-		{
-			set = 0;
-			this[i] = 2;
-		}
-		else if (set == 1)
-			this[i] = set;
-		else
-		{
-			set = 2;
-			this[i] = 2;
-		}
-	}
+		this[i] = el_simple(&set);
 	else if (str[i] == '\"')
-	{
-		if (set == 2)
-			this[i] = set;
-		else
-		{
-			set = !set;
-			this[i] = 1;
-		}
-	}
+		this[i] = el_double(&set);
 	else
 		this[i] = set;
 	return (set);
@@ -49,7 +55,7 @@ int	*bf_escapes(char *str)
 	int	*quotes;
 	int	i;
 	int	set;
-	
+
 	quotes = malloc(sizeof(int) * ft_strlen(str));
 	if (!quotes)
 		return (NULL);

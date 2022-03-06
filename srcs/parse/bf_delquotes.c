@@ -6,15 +6,15 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 17:48:36 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/03 19:57:02 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/06 20:53:40 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parse.h"
 
-int		hasquotes(char *str)
+int	hasquotes(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -30,7 +30,7 @@ int	quotes_len(char	*fragment, int *index)
 {
 	int		len;
 	char	simbol;
-	
+
 	simbol = fragment[0];
 	len = 1;
 	while (fragment[len] != simbol)
@@ -62,7 +62,7 @@ char	*bf_delquotes(char *str)
 	res = ft_strdup("");
 	while (i < (int)ft_strlen(str))
 	{
-		if (str[i] == '\"' || str[i]  == '\'')
+		if (str[i] == '\"' || str[i] == '\'')
 		{
 			res = add_str(res, ft_substr(str, start, i - start));
 			start = i + 1;

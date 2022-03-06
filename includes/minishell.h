@@ -99,6 +99,7 @@ int		ft_arrlen(char **arr);
 void	free_strarr(char **array);
 void	free_redir(void *content);
 void	free_token(void *content);
+void	free_all(t_ms data);
 
 void	signal_handler(int signum);
 void	signal_handler_child(int signum);

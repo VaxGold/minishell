@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 15:01:20 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/04 17:51:54 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/06 22:11:31 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	bf_divisor(char *line, t_token *token, t_list **argst, char **env)
 	int		i;
 	int		start;
 	int		*quotes;
+	char	*aux;
 
 	quotes = bf_escapes(line);
 	start = 0;
@@ -26,7 +27,9 @@ void	bf_divisor(char *line, t_token *token, t_list **argst, char **env)
 		if ((line[i] == ' ' || line[i] == '<'
 				|| line[i] == '>') && quotes[i] == 0)
 		{
-			bf_div_addarg(ft_substr(line, start, i - start), argst, env);
+			aux = ft_substr(line, start, i - start);
+			bf_div_addarg(aux, argst, env);
+			free (aux);
 			if (line[i] == '<')
 				i += bf_div_addredir(&line[i], &token->in, env);
 			else if (line[i] == '>')
@@ -35,7 +38,9 @@ void	bf_divisor(char *line, t_token *token, t_list **argst, char **env)
 		}
 		i++;
 	}
-	bf_div_addarg(ft_substr(line, start, i - start), argst, env);
+	aux = ft_substr(line, start, i - start);
+	bf_div_addarg(aux, argst, env);
+	free (aux);
 	free(quotes);
 	return ;
 }

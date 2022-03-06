@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 15:18:29 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/03 19:43:01 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/06 22:40:59 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ void	bf_div_addarg(char *line, t_list **flst, char **env)
 		i++;
 	}
 	add_arg(ft_substr(line, start, i - start), flst);
+	free(quotes);
 	return ;
 }

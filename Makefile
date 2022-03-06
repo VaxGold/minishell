@@ -12,7 +12,7 @@ PARSE = babelfish bf_expansions bf_tokenizer bf_escapes \
 			bf_delquotes bf_divisor bf_div_addarg bf_div_addredir
 
 TOOLS = secure_free free_strarr add_strarr rm_strarr display_array \
-		display_lst display_tokens ft_arrlen free_redir free_token
+		display_lst display_tokens ft_arrlen free_redir free_token free_all
 
 SRCS=	$(addsuffix .c, $(addprefix srcs/builtins/, $(BUILTINS))) \
 		$(addsuffix .c, $(addprefix srcs/exec/, $(EXEC))) \

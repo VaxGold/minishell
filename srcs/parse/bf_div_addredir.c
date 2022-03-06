@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 15:18:13 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/06 18:58:56 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/06 21:18:46 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,8 @@ int	bf_div_addredir(char *line, t_list **lst, char **env)
 	while (line[len] && line[len] == ' ')
 		len++;
 	i = len;
-	while (line[i] && !((line[i] == ' ' || line[i] == '<' || line[i] == '>') && quotes[i] == 0))
+	while (line[i] && !((line[i] == ' ' || line[i] == '<'
+				|| line[i] == '>') && quotes[i] == 0))
 		i++;
 	free(quotes);
 	if (i - len > 0)

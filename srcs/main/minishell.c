@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 20:23:32 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/06 20:45:40 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/06 22:36:18 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ int	main(int narg, char **xarg, char **env)
 		free(buf);
 	}
 	/*FREES*/
-	//free_all
+	free_all(this);
 	return (0);
 }
