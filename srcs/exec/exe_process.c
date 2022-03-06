@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 18:55:41 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/01 20:00:31 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/06 17:59:35 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	exe_process(t_token *token, char **env)
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(token->args[0], 2);
 	ft_putstr_fd(": command not found\n", 2);
-	exit(42);
+	exit(127);
 }
 
 // void	exe_process(char **cmd, char **env)		//GENERAL//

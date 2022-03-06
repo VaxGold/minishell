@@ -20,6 +20,8 @@
 # include <string.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <sys/types.h>
+# include <sys/dir.h>
  
 
 /*
@@ -94,5 +96,6 @@ int		ft_unset(t_ms *data);
 
 void	secure_free(char *str);
 void	free_strarr(char **array);
+int		ft_arrlen(char **arr);
 
 #endif

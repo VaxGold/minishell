@@ -11,7 +11,7 @@ MAIN = header minishell
 PARSE = babelfish bf_expansions bf_split bf_tokenizer bf_escapes \
 			bf_delquotes bf_divisor bf_div_addarg bf_div_addredir
 
-TOOLS = secure_free free_strarr add_strarr rm_strarr display_array display_lst display_tokens
+TOOLS = secure_free free_strarr add_strarr rm_strarr display_array display_lst display_tokens ft_arrlen
 
 SRCS=	$(addsuffix .c, $(addprefix srcs/builtins/, $(BUILTINS))) \
 		$(addsuffix .c, $(addprefix srcs/exec/, $(EXEC))) \
@@ -62,7 +62,8 @@ clean:
 fclean:
 	@make clean
 	@clear ; echo "\n${BLUE}${B}"[❄] ... Junk files deleted ... [❄]"\n"
-	@${RM} minishell minishell.a ${NAME} ${OBJS}
+	@${RM} minishell minishell.a .tmp ${NAME} ${OBJS}
+	@${RM} -rf minishell.dSYM ${NAME} ${OBJS}
 	@make -sC ./Libft/ fclean
 ##############################
 .PHONY: fclean clean all re
