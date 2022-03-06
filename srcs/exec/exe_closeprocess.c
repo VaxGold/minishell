@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 19:30:19 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/26 19:48:40 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/06 23:20:40 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,13 @@ static void	close_fd(t_ms *data)
 	t_token	*actual_t;
 
 	actual_t = (t_token *)(data->actual_token->content);
-	//siganls
 	close(actual_t->fd[1]);
 	close(actual_t->fd[0]);
 }
 
 static void	in_redirect(t_ms *data)
 {
-	int	fd;
+	int		fd;
 	t_token	*actual_t;
 
 	actual_t = (t_token *)(data->actual_token->content);
@@ -55,11 +54,10 @@ static void	in_redirect(t_ms *data)
 
 static void	out_redirect(t_ms *data)
 {
-	int	fd;
+	int		fd;
 	t_token	*actual_t;
 
 	actual_t = (t_token *)(data->actual_token->content);
-	//fd = exe_redirect(((t_token *)(data->actual_token->content))->out, STDOUT_FILENO);
 	fd = actual_t->fd_out;
 	if (fd == -1)
 		exit(-1);
@@ -88,7 +86,6 @@ void	exe_closeprocess(t_ms *data)
 		{
 			if (actual_t->args)
 				exe_process(actual_t, data->env);
-			//signals
 		}
 		exit(0);
 	}

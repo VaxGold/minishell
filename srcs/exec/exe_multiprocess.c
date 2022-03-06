@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 19:29:59 by omercade          #+#    #+#             */
-/*   Updated: 2022/02/27 18:51:21 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/06 23:59:37 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,19 @@ static void	close_fd(t_ms *data)
 	t_token	*next_t;
 
 	actual_t = (t_token *)(data->actual_token->content);
-	next_t	= (t_token *)(data->actual_token->next->content);
+	next_t = (t_token *)(data->actual_token->next->content);
 	close(actual_t->fd[0]);
 	close(actual_t->fd[1]);
-	//close(next_t->fd[1]);
 }
 
 static void	in_redirect(t_ms *data)
 {
-	int	fd;
+	int		fd;
 	t_token	*actual_t;
 	t_token	*next_t;
 
 	actual_t = (t_token *)(data->actual_token->content);
-	next_t	= (t_token *)(data->actual_token->next->content);
+	next_t = (t_token *)(data->actual_token->next->content);
 	fd = exe_redirect(actual_t->in, STDIN_FILENO);
 	if (fd == -1)
 		exit(-1);
@@ -50,19 +49,17 @@ static void	in_redirect(t_ms *data)
 
 static void	out_redirect(t_ms *data)
 {
-	int	fd;
+	int		fd;
 	t_token	*actual_t;
 	t_token	*next_t;
 
 	actual_t = (t_token *)(data->actual_token->content);
-	next_t	= (t_token *)(data->actual_token->next->content);
-	//fd = exe_redirect(((t_token *)(data->actual_token->content))->out, STDOUT_FILENO);
+	next_t = (t_token *)(data->actual_token->next->content);
 	fd = actual_t->fd_out;
 	if (fd == -1)
 		exit(-1);
 	else if (fd > 2)
 	{
-		//dup2(next_t->fd[1], STDOUT_FILENO);
 		close(next_t->fd[1]);
 		dup2(fd, STDIN_FILENO);
 		close(fd);
@@ -74,6 +71,26 @@ static void	out_redirect(t_ms *data)
 	}
 }
 
+static void	exe_mp_offspring(t_ms *data)
+{
+	t_token	*actual_t;
+	t_token	*next_t;
+
+	actual_t = (t_token *)(data->actual_token->content);
+	next_t = (t_token *)(data->actual_token->next->content);
+	actual_t->fd_out = exe_redirect(actual_t->out, STDOUT_FILENO);
+	close(next_t->fd[0]);
+	close(actual_t->fd[1]);
+	in_redirect(data);
+	out_redirect(data);
+	if (actual_t->fd_out != -2 && exe_builtin(data) == -1)
+	{
+		if (actual_t->args)
+			exe_process(actual_t, data->env);
+	}
+	exit(0);
+}
+
 void	exe_multiprocess(t_ms *data)
 {
 	t_token	*actual_t;
@@ -82,24 +99,11 @@ void	exe_multiprocess(t_ms *data)
 	if (data->actual_token->next)
 	{
 		actual_t = (t_token *)(data->actual_token->content);
-		next_t	= (t_token *)(data->actual_token->next->content);
+		next_t = (t_token *)(data->actual_token->next->content);
 		pipe(next_t->fd);
 		actual_t->pid = fork();
 		if (actual_t->pid == 0)
-		{
-			actual_t->fd_out = exe_redirect(actual_t->out, STDOUT_FILENO);
-			close(next_t->fd[0]);
-			close(actual_t->fd[1]);
-			in_redirect(data);
-			out_redirect(data);
-			if (actual_t->fd_out != -2 && exe_builtin(data) == -1)
-			{
-				if (actual_t->args)
-					exe_process(actual_t, data->env);
-				//signals
-			}
-			exit(0);
-		}
+			exe_mp_offspring(data);
 		else
 		{
 			close_fd(data);

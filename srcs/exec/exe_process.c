@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 18:55:41 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/06 17:59:35 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/06 23:37:41 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	*path_finder(char *cmd, char **envp)
 
 void	exe_process(t_token *token, char **env)
 {
-	char *cmd_route;
+	char	*cmd_route;
 
 	cmd_route = path_finder(token->args[0], env);
 	execve(cmd_route, token->args, env);
