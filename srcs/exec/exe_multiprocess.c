@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 19:29:59 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/06 23:59:37 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/07 04:25:52 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	out_redirect(t_ms *data)
 	else if (fd > 2)
 	{
 		close(next_t->fd[1]);
-		dup2(fd, STDIN_FILENO);
+		dup2(fd, STDOUT_FILENO);
 		close(fd);
 	}
 	else
@@ -81,10 +81,10 @@ static void	exe_mp_offspring(t_ms *data)
 	actual_t->fd_out = exe_redirect(actual_t->out, STDOUT_FILENO);
 	close(next_t->fd[0]);
 	close(actual_t->fd[1]);
-	in_redirect(data);
-	out_redirect(data);
 	if (actual_t->fd_out != -2 && exe_builtin(data) == -1)
 	{
+		in_redirect(data);
+		out_redirect(data);
 		if (actual_t->args)
 			exe_process(actual_t, data->env);
 	}
