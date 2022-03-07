@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 18:55:41 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/06 23:37:41 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/07 05:26:05 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,20 @@ char	*slashjoin(const char *str1, const char *str2)
 
 char	**env_paths(char **envp)
 {
-	int	i;
+	int		i;
+	char	*aux;
+	char	**temp;
 
 	i = 0;
 	while (envp[i])
 	{
 		if (ft_strncmp("PATH=", envp[i], 5) == 0)
-			return (ft_split(ft_substr
-					(envp[i], 5, ft_strlen(envp[i]) - 5), ':'));
+		{
+			aux = ft_substr(envp[i], 5, ft_strlen(envp[i]) - 5);
+			temp = ft_split(aux, ':');
+			free(aux);
+			return (temp);
+		}
 		i++;
 	}
 	return (NULL);
