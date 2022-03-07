@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sramis-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/07 04:51:42 by sramis-c          #+#    #+#             */
+/*   Updated: 2022/03/07 04:51:45 by sramis-c         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PARSE_H
 # define PARSE_H
 
@@ -10,8 +22,6 @@
 # include <unistd.h>
 # include <limits.h>
 # include <string.h>
-
-
 /*
 ** MACROS
 */
@@ -33,10 +43,8 @@
 ** STRUCTS & ENUMS
 */
 
-int g_signal;
 int	g_exit_status;
-
-typedef	enum e_redir_type
+typedef enum e_redir_type
 {
 	redir_out,
 	redir_out_append,
@@ -45,7 +53,7 @@ typedef	enum e_redir_type
 	none
 }			t_redir_type;
 
-typedef struct		s_token
+typedef struct s_token
 {
 	char			**args;
 	t_list			*in;
@@ -53,10 +61,10 @@ typedef struct		s_token
 	pid_t			pid;
 	int				fd[2];
 	int				fd_out;
-	int				status;		//ERR_Control
+	int				status;
 }					t_token;
 
-typedef struct		s_redirect
+typedef struct s_redirect
 {
 	char			**args;	
 	char			*simbol;

@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//	#include "../../includes/builtins.h"
 #include "../../includes/minishell.h"
 
 int	ft_env(t_ms *data)

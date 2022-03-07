@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "../../includes/builtins.h"
 #include "../../includes/minishell.h"
 
 char	*ms_get_env(char **env, char *arg)
