@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 19:30:19 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/07 02:58:51 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/07 04:26:06 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,10 @@ void	exe_closeprocess(t_ms *data)
 	if (actual_t->pid == 0)
 	{
 		actual_t->fd_out = exe_redirect(actual_t->out, STDOUT_FILENO);
-		in_redirect(data);
-		out_redirect(data);
 		if (actual_t->fd_out != -2 && exe_builtin(data) == -1)
 		{
+			in_redirect(data);
+			out_redirect(data);
 			if (actual_t->args)
 				exe_process(actual_t, data->env);
 		}

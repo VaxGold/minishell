@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 17:41:39 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/06 21:03:03 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/07 03:30:59 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,9 @@ int	*bf_escapes(char *str)
 		i++;
 	}
 	if (set != 0)
+	{
+		free(quotes);
 		return (NULL);
+	}
 	return (quotes);
 }
