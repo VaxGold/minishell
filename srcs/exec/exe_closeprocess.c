@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 19:30:19 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/06 23:20:40 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/07 02:58:51 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,26 @@
 
 static void	wait_for_all(t_ms *data)
 {
+	t_token	*actual_t;
+
 	data->actual_token = data->tokenst;
 	while (data->actual_token)
 	{
-		waitpid(((t_token *)(data->actual_token->content))->pid, NULL, 0);
+		actual_t = (t_token *)(data->actual_token->content);
+		waitpid(actual_t->pid, &actual_t->status, 0);
+		if (actual_t->status == 2)
+			g_exit_status = 130;
+		if (actual_t->status == 3)
+			g_exit_status = 131;
 		data->actual_token = data->actual_token->next;
+	}
+	actual_t = (t_token *)(ft_lstlast(data->tokenst)->content);
+	if (WIFEXITED(actual_t->status))
+	{
+		if (WEXITSTATUS(actual_t->status) == 255)
+			g_exit_status = 127;
+		else
+			g_exit_status = WEXITSTATUS(actual_t->status);
 	}
 }
 

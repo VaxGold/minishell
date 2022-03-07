@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 17:40:51 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/06 21:23:40 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/07 02:48:06 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ t_list	*babelfish(char *buf, char **env)
 	quotes = bf_escapes(buf);
 	if (!quotes)
 	{
+		free(buf);
 		ft_putstr_fd("minishell: unclosed quotes\n", 2);
 		g_exit_status = 42;
 		return (NULL);

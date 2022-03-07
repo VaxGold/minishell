@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 18:07:23 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/06 23:42:09 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/07 02:58:23 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,19 @@ static void	exe_offspring(t_ms *data)
 	out_redirect(data);
 	if (token->args)
 		exe_process(token, data->env);
-	exit(0);
+}
+
+void	wait_here(t_ms *data)
+{
+	int	status;
+
+	waitpid(((t_token *)(data->tokenst->content))->pid, &status, 0);
+	if (status == 2)
+		g_exit_status = 130;
+	if (status == 3)
+		g_exit_status = 131;
+	if (WIFEXITED(status))
+		g_exit_status = WEXITSTATUS(status);
 }
 
 void	execalibur(t_ms *data)
@@ -70,7 +82,7 @@ void	execalibur(t_ms *data)
 			token->pid = fork();
 			if (token->pid == 0)
 				exe_offspring(data);
-			waitpid(token->pid, NULL, 0);
+			wait_here(data);
 		}
 	}
 	else
