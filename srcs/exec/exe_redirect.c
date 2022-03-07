@@ -53,6 +53,20 @@ int	exe_redir_heredoc(char *arg)
 	return (open(".tmp", O_RDONLY));
 }
 
+int	exe_redir_err(void)
+{
+	ft_putstr_fd("minishell: ambiguous redirect\n", 2);
+	return (-2);
+}
+
+t_list	*next_in_list(t_list *aux, int fd)
+{
+	aux = aux->next;
+	if (aux)
+		close(fd);
+	return (aux);
+}
+
 int	exe_redirect(t_list *lst, int origin)
 {
 	int			fd;
@@ -66,24 +80,17 @@ int	exe_redirect(t_list *lst, int origin)
 	{
 		temp = *((t_redirect *)(aux->content));
 		if (!temp.args || ft_arrlen(temp.args) != 1)
-		{
-			ft_putstr_fd("minishell: ambiguous redirect\n", 2);
+			return (exe_redir_err());
+		if (!ft_strcmp(temp.simbol, ">\0")
+			&& (exe_redir_checkdir(temp.args[0], &fd) == -2))
 			return (-2);
-		}
-		if (!ft_strcmp(temp.simbol, ">\0"))
-		{
-			if (exe_redir_checkdir(temp.args[0], &fd) == -2)
-				return (-2);
-		}
 		else if (!ft_strcmp(temp.simbol, ">>\0"))
 			fd = open(temp.args[0], O_WRONLY | O_CREAT | O_APPEND, S_IRWXU);
 		else if (!ft_strcmp(temp.simbol, "<\0"))
 			fd = open(temp.args[0], O_RDONLY);
 		else if (!ft_strcmp(temp.simbol, "<<\0"))
 			fd = exe_redir_heredoc(temp.args[0]);
-		aux = aux->next;
-		if (aux)
-			close(fd);
+		aux = next_in_list(aux, fd);
 	}
 	return (fd);
 }

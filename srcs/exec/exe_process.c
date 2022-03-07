@@ -74,16 +74,3 @@ void	exe_process(t_token *token, char **env)
 	ft_putstr_fd(": command not found\n", 2);
 	exit(127);
 }
-
-// void	exe_process(char **cmd, char **env)		//GENERAL//
-// {
-// 	char *cmd_route;
-
-// 	cmd_route = path_finder(cmd[0], env);
-// 	printf("CMD ROUTE: %s\n", cmd_route);
-// 	execve(cmd_route, cmd, env);
-// 	ft_putstr_fd("minishell: ", 2);
-// 	ft_putstr_fd(cmd[0], 2);
-// 	ft_putstr_fd(": command not found\n", 2);
-// 	exit(42);
-// }
