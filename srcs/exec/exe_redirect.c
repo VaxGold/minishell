@@ -12,7 +12,7 @@
 
 #include "../../includes/minishell.h"
 
-int	exe_redir_checkdir(char *arg, int *fd)
+int	exe_redir_checkdir(char *arg)
 {
 	DIR	*dir;
 
@@ -25,7 +25,6 @@ int	exe_redir_checkdir(char *arg, int *fd)
 		ft_putendl_fd(": Is a directory", 2);
 		return (-2);
 	}
-	*fd = open(arg, O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, S_IRWXU);
 	return (0);
 }
 
@@ -56,15 +55,23 @@ int	exe_redir_heredoc(char *arg)
 int	exe_redir_err(void)
 {
 	ft_putstr_fd("minishell: ambiguous redirect\n", 2);
-	return (-2);
+	return (1);
 }
 
-t_list	*next_in_list(t_list *aux, int fd)
+int	exe_redir_check(t_redirect temp)
 {
-	aux = aux->next;
-	if (aux)
-		close(fd);
-	return (aux);
+	int	fd;
+
+	fd = 0;
+	if (!ft_strcmp(temp.simbol, ">\0"))
+		fd = open(temp.args[0], O_WRONLY | O_CREAT | O_TRUNC, S_IRWXU);
+	else if (!ft_strcmp(temp.simbol, ">>\0"))
+		fd = open(temp.args[0], O_WRONLY | O_CREAT | O_APPEND, S_IRWXU);
+	else if (!ft_strcmp(temp.simbol, "<\0"))
+		fd = open(temp.args[0], O_RDONLY);
+	else if (!ft_strcmp(temp.simbol, "<<\0"))
+		fd = exe_redir_heredoc(temp.args[0]);
+	return (fd);
 }
 
 int	exe_redirect(t_list *lst, int origin)
@@ -81,16 +88,14 @@ int	exe_redirect(t_list *lst, int origin)
 		temp = *((t_redirect *)(aux->content));
 		if (!temp.args || ft_arrlen(temp.args) != 1)
 			return (exe_redir_err());
-		if (!ft_strcmp(temp.simbol, ">\0")
-			&& (exe_redir_checkdir(temp.args[0], &fd) == -2))
+		if ((!ft_strcmp(temp.simbol, ">\0") || !ft_strcmp(temp.simbol, ">>\0"))
+			&& (exe_redir_checkdir(temp.args[0]) == -2))
 			return (-2);
-		else if (!ft_strcmp(temp.simbol, ">>\0"))
-			fd = open(temp.args[0], O_WRONLY | O_CREAT | O_APPEND, S_IRWXU);
-		else if (!ft_strcmp(temp.simbol, "<\0"))
-			fd = open(temp.args[0], O_RDONLY);
-		else if (!ft_strcmp(temp.simbol, "<<\0"))
-			fd = exe_redir_heredoc(temp.args[0]);
-		aux = next_in_list(aux, fd);
+		else
+			fd = exe_redir_check(temp);
+		aux = aux->next;
+		if (aux)
+			close(fd);
 	}
 	return (fd);
 }
