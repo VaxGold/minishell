@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 17:41:07 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/06 22:03:12 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/07 02:24:59 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,11 @@ char	*exp_variable(char *expand, char **env)
 	while (env[i])
 	{
 		if (ft_strncmp(temp, env[i], ft_strlen(temp)) == 0)
+		{
+			free(mod);
 			mod = ft_substr(env[i], ft_strlen(temp),
 					ft_strlen(env[i]) - ft_strlen(temp));
+		}
 		i++;
 	}
 	free(expand);
