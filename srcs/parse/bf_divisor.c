@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 15:01:20 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/07 01:38:55 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/07 01:48:10 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	temp_arg(char *line, t_list **argst, char **env, int len)
 {
 	char	*aux;
-	
+
 	aux = ft_substr(line, 0, len);
 	if (ft_strlen(aux) > 0)
 		bf_div_addarg(aux, argst, env);
